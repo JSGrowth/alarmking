@@ -1,30 +1,23 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {MD2Colors as Colors} from 'react-native-paper';
 import {AutoFocusProvider, useAutoFocus} from '../../contexts';
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {ModalStackParamList} from '../StackNavigator';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 type messageScreenProps = StackNavigationProp<ModalStackParamList, 'Message'>;
-// type messageRouteProps = RouteProp<ModalStackParamList, 'Message'>;
+type messageRouteProp = RouteProp<ModalStackParamList, 'Message'>;
 const Message = () => {
   const navigation = useNavigation<messageScreenProps>();
-  // const route = useRoute<messageRouteProps>();
-
   const focus = useAutoFocus();
-  // const dispatch = useDispatch();
+  // const {state, setState} = useRoute<messageRouteProp>();
+  const [state, setState] = useState<string>('');
   //prettier-ignore
-  // const {message} = useSelector<AppState, A.State>(({alarm}) => alarm);
-  const [newMessage, setNewMessage] = useState<string>('Set a new message');
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Pressable
-          onPress={() => {
-            // dispatch(A.updateAction('message', newMessage));
-            navigation.goBack();
-          }}>
+        <Pressable onPress={() => navigation.goBack()}>
           <Text
             style={[{fontSize: 18, color: Colors.blue500, fontWeight: '600'}]}>
             Done
@@ -32,7 +25,7 @@ const Message = () => {
         </Pressable>
       ),
     });
-  }, [navigation, newMessage]);
+  }, [navigation, state]);
 
   return (
     <View style={[styles.view]}>
@@ -41,8 +34,8 @@ const Message = () => {
         <TextInput
           onFocus={focus}
           style={[styles.textInput]}
-          value={newMessage}
-          onChangeText={setNewMessage}
+          value={state}
+          onChangeText={setState}
         />
       </AutoFocusProvider>
     </View>

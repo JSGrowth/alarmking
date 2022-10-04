@@ -24,7 +24,7 @@ export default function Home() {
       headerTitle: 'Alarm',
       headerRight: () =>
         //prettier-ignore
-        <Icon name="plus" size={30} onPress={() => navigation.navigate('AddAlarmModal')} />,
+        <Icon name="plus" size={30} onPress={() => navigation.navigate({key: 'AddAlarmModal', name: 'AddAlarmModal'})} />,
     });
   }, [navigation]);
 

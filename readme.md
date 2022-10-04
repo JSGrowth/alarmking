@@ -7,11 +7,11 @@
 ## Todo-List
 
 - CreateAlarm, EditAlarm, etc... async storage에 저장된 데이터 다룰때 화면에 properly 반영되도록... flag를 써야하나?
-- Alarm의 Time이 보여지는 것과 다르게 생성, 변경되는 문제
-- 데이터 저장하는 구조 다시 잘 생각해보기
-- navigation props 에러뜨는거 확인 (in Home.tsx - navigate to AddAlarm)
+- Alarm의 Time이 보여지는 것과 다르게 생성, 변경되는 문제(occational error...)
+- 데이터 저장 구조 (Redux?)
+- pass navigation params ex) AddAlarm -> Song, Repeat... (react, typescript, navigation 공부 필요)
 - Alarm 이 잘 trigger 되도록 확인
-- 그 외... (snooze, arithmetic prob or type sentence to turn off alarm)
+- 그 외... (snooze, arithmetic question or type sentence to turn off the alarm)
 
 ## how to resolve error while using npm vector-icon
 
@@ -21,5 +21,5 @@
 
 ### packages that i used
 
--https://github.com/liplylie/react-native-simple-alarm.git
--https://github.com/oblador/react-native-vector-icons.git
+- https://github.com/liplylie/react-native-simple-alarm.git
+- https://github.com/oblador/react-native-vector-icons.git

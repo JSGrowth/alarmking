@@ -7,39 +7,34 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {ModalStackParamList} from './StackNavigator';
 import {MD2Colors as Colors} from 'react-native-paper';
-import {createAlarm} from '../libs/alarm';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppState} from '../store';
-import * as A from '../store/alarm';
+import {AlarmType, createAlarm} from '../libs/alarm';
 
-type alarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
+type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
 const AddAlarm = () => {
-  const navigation = useNavigation<alarmScreenProp>();
-  const {active, date, message, snooze, soundName} = useSelector<
-    AppState,
-    A.State
-  >(({alarm}) => alarm);
-  const dispatch = useDispatch();
-  const [dateState, setDateState] = useState<Date>(new Date(date));
+  const navigation = useNavigation<AlarmScreenProp>();
+  const [newAlarm, setNewAlarm] = useState<AlarmType>({
+    active: true,
+    date: new Date(),
+    message: 'New Alarm',
+    snooze: 1,
+    soundName: 'Marimba',
+  });
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Pressable
-          onPress={() => {
-            dispatch(A.resetAction());
-            navigation.goBack();
-          }}>
+        <Pressable onPress={() => navigation.goBack()}>
           <Text style={[{fontSize: 18, color: Colors.blue500}]}>Cancel</Text>
         </Pressable>
       ),
       headerRight: () => (
         <Pressable
-          onPress={() => {
-            createAlarm({active, date, message, snooze, soundName});
-            navigation.goBack();
-          }}>
+          onPress={() =>
+            createAlarm({...newAlarm}).then(() => {
+              navigation.goBack();
+            })
+          }>
           <Text
             style={[{fontSize: 18, color: Colors.blue500, fontWeight: '600'}]}>
             Save
@@ -47,23 +42,23 @@ const AddAlarm = () => {
         </Pressable>
       ),
     });
-  }, [date, active, navigation]);
-  // }, [navigation]);
+  }, [newAlarm, navigation]);
 
   const optionData = [
-    {navigateTo: 'Message', value: 'message'},
+    {navigateTo: 'Message', value: newAlarm.message},
     {navigateTo: 'Repeat', value: 'Never'},
-    {navigateTo: 'Song', value: 'Marimba'},
+    {navigateTo: 'Song', value: newAlarm.soundName},
   ];
 
   return (
     <View style={[styles.view]}>
       <DatePicker
-        date={dateState}
+        date={newAlarm.date}
         mode="time"
         onDateChange={picked => {
-          setDateState(picked);
-          dispatch(A.updateAction('date', picked.toISOString()));
+          setNewAlarm((prevState: AlarmType) => {
+            return {...prevState, date: picked};
+          });
         }}
       />
       <View style={[styles.tapListView]}>
@@ -90,9 +85,11 @@ const AddAlarm = () => {
           <View style={[styles.tapItemView]}>
             <Text style={[{fontSize: 20, color: Colors.grey900}]}>Active</Text>
             <Switch
-              value={active}
+              value={newAlarm.active}
               onChange={() => {
-                dispatch(A.updateAction('active', !active));
+                setNewAlarm((prevState: AlarmType) => {
+                  return {...prevState, active: !prevState.active};
+                });
               }}
             />
           </View>

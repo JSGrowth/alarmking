@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
@@ -6,9 +6,9 @@ import {
 import {NavigatorScreenParams} from '@react-navigation/native';
 import Home from './Home';
 import AddAlarm from './AddAlarm';
-import Message from './alarmDetail/Message';
-import Song from './alarmDetail/Song';
-import Repeat from './alarmDetail/Repeat';
+import Message from './AddAlarmDetail/Message';
+import Song from './AddAlarmDetail/Song';
+import Repeat from './AddAlarmDetail/Repeat';
 
 const modalScreenOption: NativeStackNavigationOptions = {
   headerBackTitle: 'Back',
@@ -17,9 +17,9 @@ const modalScreenOption: NativeStackNavigationOptions = {
 
 export type ModalStackParamList = {
   AddAlarm: undefined;
-  Message: undefined;
-  Song: undefined;
-  Repeat: undefined;
+  Message: {state: any; setState: Dispatch<any>};
+  Song: {state: any; setState: Dispatch<any>};
+  Repeat: {state: any; setState: Dispatch<any>};
 };
 
 export type RootStackParamList = {

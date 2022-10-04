@@ -6,7 +6,7 @@ import {AlarmType, deleteAlarmById, switchAlarmById} from '../libs/alarm';
 import moment from 'moment';
 
 const ListItem = (props: AlarmType) => {
-  const {oid, active, date, title, message} = props;
+  const {oid, active, date, message} = props;
   return (
     <Swipeable
       renderRightActions={(progress, dragAnimatedValue) =>
@@ -28,7 +28,7 @@ const ListItem = (props: AlarmType) => {
         </View>
         <View style={[styles.messageView]}>
           <Text style={[styles.messageText]}>
-            {title},{message}
+            {message}
           </Text>
           <Text style={[styles.messageText]}>{moment(date).fromNow()}</Text>
         </View>

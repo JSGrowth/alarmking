@@ -27,7 +27,6 @@ const Song = () => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => {
-              // dispatch(A.)
               navigation.goBack();
             }}>
             <View style={[styles.tapItemView]}>

@@ -5,8 +5,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MD2Colors as Colors} from 'react-native-paper';
 import Timer from './Timer';
-// import Timer from './Timer';
-// import {getAlarms} from '../libs/alarm';
 
 type TabBarIconProps = {focused: boolean; color: string; size: number};
 
@@ -30,7 +28,6 @@ const screenOptions = ({route}: {route: RouteProp<ParamListBase, string>}) => {
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
-  // getAlarms(); // this should be called inside of the first funtional component of ReduxProvider
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
