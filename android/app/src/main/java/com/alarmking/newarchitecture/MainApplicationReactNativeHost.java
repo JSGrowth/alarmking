@@ -1,4 +1,4 @@
-package com.alarmmm.newarchitecture;
+package com.alarmking.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.alarmmm.BuildConfig;
-import com.alarmmm.newarchitecture.components.MainComponentsRegistry;
-import com.alarmmm.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.alarmking.BuildConfig;
+import com.alarmking.newarchitecture.components.MainComponentsRegistry;
+import com.alarmking.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
