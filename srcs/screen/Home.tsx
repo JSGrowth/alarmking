@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScrollEnabledProvider, useScrollEnabled} from '../contexts';
 import {useNavigation} from '@react-navigation/native';
 // prettier-ignore
-import {RootStackParamList} from './StackNavigator';
+import {RootStackParamList} from './Main';
 import {StackNavigationProp} from '@react-navigation/stack';
 import ListItem from './ListItem';
 import {AlarmType, deleteAllAlarms, getAlarms} from '../libs/alarm';

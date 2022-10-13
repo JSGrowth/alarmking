@@ -1,22 +1,16 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
-// import {Provider as ReduxProvider} from 'react-redux';
-import TabNavigator from './srcs/screen/TabNavigator';
-
-// const store = makeStore();
+// import TabNavigator from './srcs/screen/TabNavigator';
+import Main from './srcs/screen/Main';
 
 const App = () => {
   return (
-    // <ReduxProvider store={store}>
     <NavigationContainer>
-      <TabNavigator />
+      {/* <TabNavigator /> */}
+      <Main />
     </NavigationContainer>
-    // </ReduxProvider>
   );
 };
 
 export default App;
-function makeStore() {
-  throw new Error('Function not implemented.');
-}

@@ -1,13 +1,14 @@
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 //prettier-ignore
-import { Pressable, StyleSheet, Text, View, Switch, FlatList} from 'react-native';
+import { Pressable, Text, View, Switch, FlatList} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {ModalStackParamList} from './StackNavigator';
+import {ModalStackParamList} from './Main';
 import {MD2Colors as Colors} from 'react-native-paper';
 import {AlarmType, createAlarm} from '../libs/alarm';
+import {styles} from './AddAlarm.style';
 
 type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
@@ -99,36 +100,5 @@ const AddAlarm = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  tapListView: {
-    flexDirection: 'column',
-    alignSelf: 'center',
-    width: '90%',
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.grey200,
-  },
-  tapItemView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: 'transparent',
-    marginLeft: 12,
-    marginRight: 12,
-    margin: 10,
-  },
-  separator: {
-    height: 1,
-    marginHorizontal: 20,
-    backgroundColor: 'lightgray',
-  },
-});
 
 export default AddAlarm;

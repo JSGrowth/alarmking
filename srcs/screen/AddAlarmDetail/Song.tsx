@@ -3,7 +3,7 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {MD2Colors as Colors} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ModalStackParamList} from '../StackNavigator';
+import {ModalStackParamList} from '../Main';
 import {styles} from './ButtonList.styles';
 type songScreenProps = StackNavigationProp<ModalStackParamList, 'Song'>;
 // type songRouteProps = RouteProp<ModalStackParamList, 'Song'>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import type {RouteProp, ParamListBase} from '@react-navigation/native';
-import StackNavigator from './StackNavigator';
+import StackNavigator from '../Main';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {MD2Colors as Colors} from 'react-native-paper';
