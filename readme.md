@@ -23,4 +23,4 @@
 
 - https://github.com/liplylie/react-native-simple-alarm.git
 - https://github.com/oblador/react-native-vector-icons.git
-- https://github.com/henninghall/react-native-date-picker.git
+- https://github.com/react-native-datetimepicker/datetimepicker
