@@ -1,5 +1,5 @@
-import React, {useLayoutEffect, useState} from 'react';
-import DatePicker from 'react-native-date-picker';
+import React, {useLayoutEffect, useRef, useState} from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 //prettier-ignore
 import { Pressable, StyleSheet, Text, View, Switch, FlatList} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -52,10 +52,11 @@ const AddAlarm = () => {
 
   return (
     <View style={[styles.view]}>
-      <DatePicker
-        date={newAlarm.date}
+      <DateTimePicker
         mode="time"
-        onDateChange={picked => {
+        display="spinner"
+        value={newAlarm.date}
+        onChange={(event, picked) => {
           setNewAlarm((prevState: AlarmType) => {
             return {...prevState, date: picked};
           });
