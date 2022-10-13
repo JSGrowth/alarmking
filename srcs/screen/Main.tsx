@@ -30,7 +30,7 @@ export type RootStackParamList = {
 const ModalStack = createNativeStackNavigator<ModalStackParamList>();
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-const StackNavigator = () => {
+const Main = () => {
   return (
     <RootStack.Navigator initialRouteName="Home">
       <RootStack.Screen name="Home" component={Home} />
@@ -80,4 +80,4 @@ const AddAlarmModal = () => {
   );
 };
 
-export default StackNavigator;
+export default Main;

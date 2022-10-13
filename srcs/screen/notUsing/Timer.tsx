@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, View} from 'react-native';
-import {ScrollEnabledProvider} from '../contexts';
+import {ScrollEnabledProvider} from '../../contexts';
 // import {useNavigation} from '@react-navigation/native';
 
 export default function Timer() {

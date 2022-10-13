@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {MD2Colors as Colors} from 'react-native-paper';
 import {AutoFocusProvider, useAutoFocus} from '../../contexts';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import {ModalStackParamList} from '../StackNavigator';
+import {ModalStackParamList} from '../Main';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 type messageScreenProps = StackNavigationProp<ModalStackParamList, 'Message'>;
