@@ -4,8 +4,10 @@ import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
 import {Animated, Switch, Text, View} from 'react-native';
 import {AlarmType, deleteAlarmById, switchAlarmById} from '../libs/alarm';
 import moment from 'moment';
+import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
 
 const ListItem = (props: AlarmType) => {
+  const {setUpdated} = useAlarmUpdate();
   const {oid, active, date, message} = props;
   return (
     <Swipeable
@@ -13,23 +15,17 @@ const ListItem = (props: AlarmType) => {
         renderRightActions(progress, dragAnimatedValue)
       }
       friction={1.5}
-      onSwipeableOpen={() => {
-        deleteAlarmById(oid);
-      }}>
+      onSwipeableOpen={() => deleteAlarmById(oid).then(() => setUpdated(true))}>
       <View style={[styles.itemView]}>
         <View style={[styles.timeView]}>
           <Text style={[styles.timeText]}>{moment(date).format('HH:mm')}</Text>
           <Switch
             value={active}
-            onChange={() => {
-              switchAlarmById(props);
-            }}
+            onChange={() => switchAlarmById(props).then(() => setUpdated(true))}
           />
         </View>
         <View style={[styles.messageView]}>
-          <Text style={[styles.messageText]}>
-            {message}
-          </Text>
+          <Text style={[styles.messageText]}>{message}</Text>
           <Text style={[styles.messageText]}>{moment(date).fromNow()}</Text>
         </View>
       </View>

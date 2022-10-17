@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScrollEnabledProvider, useScrollEnabled} from '../contexts';
@@ -8,6 +8,7 @@ import {RootStackParamList} from './Main';
 import {StackNavigationProp} from '@react-navigation/stack';
 import ListItem from './ListItem';
 import {AlarmType, deleteAllAlarms, getAlarms} from '../libs/alarm';
+import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -15,18 +16,30 @@ export default function Home() {
   const [scrollEnabled] = useScrollEnabled();
   const navigation = useNavigation<homeScreenProp>();
   const [alarmList, setAlarmList] = useState<AlarmType>([]);
+  const {updated, setUpdated} = useAlarmUpdate();
   useLayoutEffect(() => {
-    getAlarms().then(response => setAlarmList([...response]));
     navigation.setOptions({
-      headerLeft: () =>
-        //prettier-ignore
-        <Icon name="trash-can-outline" size={30} onPress={() => {deleteAllAlarms()}}/>,
+      headerLeft: () => (
+        <Icon
+          name="trash-can-outline"
+          size={30}
+          onPress={() => {
+            deleteAllAlarms().then(() => setUpdated(true));
+          }}
+        />
+      ),
       headerTitle: 'Alarm',
       headerRight: () =>
         //prettier-ignore
         <Icon name="plus" size={30} onPress={() => navigation.navigate({key: 'AddAlarmModal', name: 'AddAlarmModal'})} />,
     });
   }, [navigation]);
+  useEffect(() => {
+    if (updated) {
+      getAlarms().then(response => setAlarmList([...response]));
+      setUpdated(false);
+    }
+  }, [updated]);
 
   return (
     <SafeAreaView style={[{flex: 1}]}>
