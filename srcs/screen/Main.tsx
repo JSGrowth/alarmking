@@ -9,6 +9,7 @@ import AddAlarm from './AddAlarm';
 import Message from './AddAlarmDetail/Message';
 import Song from './AddAlarmDetail/Song';
 import Repeat from './AddAlarmDetail/Repeat';
+import {AlarmUpdateProvider} from '../contexts/useAlarmUpdate';
 
 const modalScreenOption: NativeStackNavigationOptions = {
   headerBackTitle: 'Back',
@@ -32,18 +33,20 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const Main = () => {
   return (
-    <RootStack.Navigator initialRouteName="Home">
-      <RootStack.Screen name="Home" component={Home} />
-      <RootStack.Screen
-        name="AddAlarmModal"
-        component={AddAlarmModal}
-        options={{
-          headerShown: false,
-          presentation: 'modal',
-          // ...TransitionPresets.ModalPresentationIOS,
-        }}
-      />
-    </RootStack.Navigator>
+    <AlarmUpdateProvider>
+      <RootStack.Navigator initialRouteName="Home">
+        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen
+          name="AddAlarmModal"
+          component={AddAlarmModal}
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+            // ...TransitionPresets.ModalPresentationIOS,
+          }}
+        />
+      </RootStack.Navigator>
+    </AlarmUpdateProvider>
   );
 };
 

@@ -9,11 +9,13 @@ import {ModalStackParamList} from './Main';
 import {MD2Colors as Colors} from 'react-native-paper';
 import {AlarmType, createAlarm} from '../libs/alarm';
 import {styles} from './AddAlarm.style';
+import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
 
 type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
 const AddAlarm = () => {
   const navigation = useNavigation<AlarmScreenProp>();
+  const {setUpdated} = useAlarmUpdate();
   const [newAlarm, setNewAlarm] = useState<AlarmType>({
     active: true,
     date: new Date(),
@@ -33,6 +35,7 @@ const AddAlarm = () => {
         <Pressable
           onPress={() =>
             createAlarm({...newAlarm}).then(() => {
+              setUpdated(true);
               navigation.goBack();
             })
           }>

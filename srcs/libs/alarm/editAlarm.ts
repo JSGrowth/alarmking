@@ -6,11 +6,11 @@ import moment from 'moment';
 export const switchAlarmById = async (props: AlarmType) => {
   const {oid, active} = props;
   if (oid) {
-    console.log('스위칭', JSON.stringify(props));
     try {
       if (active) {
         await cancelAlarmById(props.oid).then(response => {
-          console.log('set false', JSON.stringify(response)); //여기서 왜 시간이 지 맘대로 바뀌냐고
+          console.log('set false', JSON.stringify(response));
+          //여기서 왜 시간이 지 맘대로 바뀌냐고
         });
       } else
         await activateAlarmById(props.oid).then(response => {
