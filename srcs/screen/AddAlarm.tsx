@@ -1,8 +1,10 @@
-import React, {useLayoutEffect, useState} from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import React, {useLayoutEffect, useReducer, useRef, useState} from 'react';
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 //prettier-ignore
 import { Pressable, Text, View, Switch, FlatList} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {ModalStackParamList} from './Main';
@@ -10,19 +12,25 @@ import {MD2Colors as Colors} from 'react-native-paper';
 import {AlarmType, createAlarm} from '../libs/alarm';
 import {styles} from './AddAlarm.style';
 import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
+import useCreateAlarm from '../contexts/CreateAlarm/context';
+import {updateAction} from '../contexts/CreateAlarm/actions';
 
 type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
 const AddAlarm = () => {
   const navigation = useNavigation<AlarmScreenProp>();
   const {setUpdated} = useAlarmUpdate();
-  const [newAlarm, setNewAlarm] = useState<AlarmType>({
-    active: true,
-    date: new Date(),
-    message: 'New Alarm',
-    snooze: 1,
-    soundName: 'Marimba',
-  });
+  const {state, dispatch} = useCreateAlarm();
+  // const [state, dispatch] = useReducer(
+  //   (state: AlarmType, updates: any) => ({
+  //     ...state,
+  //     ...updates,
+  //   }),
+  //   initialAlarm,
+  // );
+  const handleDate = (event: DateTimePickerEvent, date?: Date) => {
+    if (date) dispatch(updateAction('date', date));
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -34,7 +42,7 @@ const AddAlarm = () => {
       headerRight: () => (
         <Pressable
           onPress={() =>
-            createAlarm({...newAlarm}).then(() => {
+            createAlarm({...state}).then(() => {
               setUpdated(true);
               navigation.goBack();
             })
@@ -46,12 +54,12 @@ const AddAlarm = () => {
         </Pressable>
       ),
     });
-  }, [newAlarm, navigation]);
+  }, [navigation]);
 
   const optionData = [
-    {navigateTo: 'Message', value: newAlarm.message},
+    {navigateTo: 'Message', value: state.message},
     {navigateTo: 'Repeat', value: 'Never'},
-    {navigateTo: 'Song', value: newAlarm.soundName},
+    {navigateTo: 'Song', value: state.soundName},
   ];
 
   return (
@@ -59,12 +67,9 @@ const AddAlarm = () => {
       <DateTimePicker
         mode="time"
         display="spinner"
-        value={newAlarm.date}
-        onChange={(event, picked) => {
-          setNewAlarm((prevState: AlarmType) => {
-            return {...prevState, date: picked};
-          });
-        }}
+        locale={'en_GB'}
+        value={state.date}
+        onChange={handleDate}
       />
       <View style={[styles.tapListView]}>
         <FlatList
@@ -72,7 +77,6 @@ const AddAlarm = () => {
           ItemSeparatorComponent={() => <View style={[styles.separator]} />}
           renderItem={({item}) => (
             <TouchableOpacity
-              // @ts-ignore
               onPress={() => navigation.navigate(item.navigateTo)}>
               <View style={[styles.tapItemView]}>
                 <Text style={[{fontSize: 20, color: Colors.grey900}]}>
@@ -90,12 +94,8 @@ const AddAlarm = () => {
           <View style={[styles.tapItemView]}>
             <Text style={[{fontSize: 20, color: Colors.grey900}]}>Active</Text>
             <Switch
-              value={newAlarm.active}
-              onChange={() => {
-                setNewAlarm((prevState: AlarmType) => {
-                  return {...prevState, active: !prevState.active};
-                });
-              }}
+              value={state.active}
+              onValueChange={val => dispatch(updateAction('active', val))}
             />
           </View>
         </TouchableOpacity>
