@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   tapItemView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     backgroundColor: 'transparent',
     marginLeft: 12,
     marginRight: 12,

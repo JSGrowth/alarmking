@@ -7,7 +7,7 @@ import {NavigatorScreenParams} from '@react-navigation/native';
 import Home from './Home';
 import AddAlarm from './AddAlarm';
 import Message from './AddAlarmDetail/Message';
-import Song from './AddAlarmDetail/Song';
+import Song from './AddAlarmDetail/Sound';
 import Repeat from './AddAlarmDetail/Repeat';
 import {AlarmUpdateProvider} from '../contexts/useAlarmUpdate';
 import {AlarmContextProvider} from '../contexts/CreateAlarm/context';

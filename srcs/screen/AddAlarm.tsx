@@ -1,19 +1,17 @@
-import React, {useLayoutEffect, useReducer, useRef, useState} from 'react';
+import React, {useLayoutEffect} from 'react';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
-//prettier-ignore
-import { Pressable, Text, View, Switch, FlatList} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {Pressable, Text, View, Switch, FlatList} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {ModalStackParamList} from './Main';
 import {MD2Colors as Colors} from 'react-native-paper';
-import {AlarmType, createAlarm} from '../libs/alarm';
+import {createAlarm} from '../libs/alarm';
 import {styles} from './AddAlarm.style';
 import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
-import useCreateAlarm from '../contexts/CreateAlarm/context';
-import {updateAction} from '../contexts/CreateAlarm/actions';
+import {useCreateAlarm, updateAction} from '../contexts/CreateAlarm';
 
 type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
@@ -21,17 +19,17 @@ const AddAlarm = () => {
   const navigation = useNavigation<AlarmScreenProp>();
   const {setUpdated} = useAlarmUpdate();
   const {state, dispatch} = useCreateAlarm();
-  // const [state, dispatch] = useReducer(
-  //   (state: AlarmType, updates: any) => ({
-  //     ...state,
-  //     ...updates,
-  //   }),
-  //   initialAlarm,
-  // );
   const handleDate = (event: DateTimePickerEvent, date?: Date) => {
     if (date) dispatch(updateAction('date', date));
   };
-
+  // const handleCreate = useCallback(() => {
+  //   console.log(state);
+  //   createAlarm({...state}).then(() => {
+  //     setUpdated(true);
+  //     navigation.goBack();
+  //   });
+  // }, [state]);
+  // todo: state 변경마다 re render?? optimal하게 바꿔보기
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -54,7 +52,7 @@ const AddAlarm = () => {
         </Pressable>
       ),
     });
-  }, [navigation]);
+  }, [state, navigation]);
 
   const optionData = [
     {navigateTo: 'Message', value: state.message},
