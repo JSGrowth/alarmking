@@ -5,8 +5,7 @@ import {AutoFocusProvider, useAutoFocus} from '../../contexts';
 import {useNavigation} from '@react-navigation/native';
 import {ModalStackParamList} from '../Main';
 import {StackNavigationProp} from '@react-navigation/stack';
-import useCreateAlarm from '../../contexts/CreateAlarm/context';
-import {updateAction} from '../../contexts/CreateAlarm/actions';
+import {useCreateAlarm, updateAction} from '../../contexts/CreateAlarm';
 
 type messageScreenProps = StackNavigationProp<ModalStackParamList, 'Message'>;
 
