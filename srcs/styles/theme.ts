@@ -9,12 +9,12 @@ export const color = {
 };
 
 export const fontSize = {
-  /** 12 */
-  xs: 12,
   /** 14 */
-  sm: 14,
+  xs: 14,
   /** 16 */
-  md: 16,
+  sm: 16,
+  /** 18 */
+  md: 18,
   /** 20 */
   lg: 20,
   /** 40 */

@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   messageText: {
-    fontSize: theme.fontSize.md,
+    fontSize: theme.fontSize.sm,
     color: theme.color.grey99,
     fontFamily: 'NotoSansKR-Regular',
   },

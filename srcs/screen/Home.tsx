@@ -23,12 +23,14 @@ export default function Home() {
       headerStyle: {
         backgroundColor: 'black',
       },
+      headerTitle: '👑alarmking',
+      headerTintColor: theme.color.white,
       headerLeft: () => (
         <Text
           style={[
             {
               fontFamily: 'NotoSansKR-Regular',
-              fontSize: theme.fontSize.lg,
+              fontSize: theme.fontSize.md,
               color: theme.color.primary,
             },
           ]}>
