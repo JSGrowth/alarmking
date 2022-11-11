@@ -11,9 +11,19 @@ import Song from './AddAlarmDetail/Sound';
 import Repeat from './AddAlarmDetail/Repeat';
 import {AlarmUpdateProvider} from '../contexts/useAlarmUpdate';
 import {AlarmContextProvider} from '../contexts/CreateAlarm/context';
+import theme from '../styles/theme';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const modalScreenOption: NativeStackNavigationOptions = {
-  headerBackTitle: 'Back',
+  headerStyle: {
+    backgroundColor: theme.color.black,
+  },
+  headerTitleStyle: {
+    color: theme.color.white,
+    fontFamily: 'NotoSansKR-Regular',
+  },
+  headerTintColor: theme.color.primary,
+  headerBackTitleVisible: false,
   presentation: 'card',
 };
 
@@ -36,15 +46,18 @@ const Main = () => {
   return (
     <AlarmUpdateProvider>
       <RootStack.Navigator initialRouteName="Home">
-        <RootStack.Screen name="Home" component={Home} />
+        <RootStack.Screen
+          name="Home"
+          component={Home}
+          options={{title: '👑alarmking', headerTintColor: theme.color.white}}
+        />
         <RootStack.Screen
           name="AddAlarmModal"
           component={AddAlarmModal}
-          options={{
-            headerShown: false,
-            presentation: 'modal',
-            // ...TransitionPresets.ModalPresentationIOS,
-          }}
+          options={
+            {headerShown: false, headerBackButtonMenuEnabled: false}
+            // {...modalScreenOption,title:'알람 추가' }
+          }
         />
       </RootStack.Navigator>
     </AlarmUpdateProvider>
@@ -60,11 +73,7 @@ const AddAlarmModal = () => {
         <ModalStack.Screen
           name="AddAlarm"
           component={AddAlarm}
-          options={{
-            title: 'Add Alarm',
-            presentation: 'modal',
-            // ...TransitionPresets.ModalPresentationIOS,
-          }}
+          options={{title: '알람 추가'}}
         />
         <ModalStack.Screen
           name="Message"

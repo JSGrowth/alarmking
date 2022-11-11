@@ -5,7 +5,7 @@ export const createAlarm = async (props: AlarmType) => {
   const {active, date, message, snooze, soundName} = props;
   try {
     await RNCreateAlarm({
-      active: active,
+      active: true,
       date: date.toISOString(),
       message: message,
       snooze: snooze,

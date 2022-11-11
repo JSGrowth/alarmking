@@ -5,6 +5,7 @@ import {Animated, Switch, Text, View} from 'react-native';
 import {AlarmType, deleteAlarmById, switchAlarmById} from '../libs/alarm';
 import moment from 'moment';
 import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
+import theme from '../styles/theme';
 
 const ListItem = (props: AlarmType) => {
   const {setUpdated} = useAlarmUpdate();
@@ -16,10 +17,12 @@ const ListItem = (props: AlarmType) => {
       }
       friction={1.5}
       onSwipeableOpen={() => deleteAlarmById(oid).then(() => setUpdated(true))}>
-      <View style={[styles.itemView]}>
+      <View
+        style={active ? styles.itemView : [styles.itemView, {opacity: 0.35}]}>
         <View style={[styles.timeView]}>
           <Text style={[styles.timeText]}>{moment(date).format('HH:mm')}</Text>
           <Switch
+            trackColor={{true: theme.color.primary, false: theme.color.black}}
             value={active}
             onChange={() => switchAlarmById(props).then(() => setUpdated(true))}
           />
