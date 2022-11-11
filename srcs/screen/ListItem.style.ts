@@ -36,18 +36,15 @@ export const styles = StyleSheet.create({
 
   /* Swipeables */
   rightActionView: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    backgroundColor: theme.color.grey99,
-    marginVertical: 8,
-    paddingBottom: 12,
-    paddingHorizontal: 16,
-    borderRadius: 4,
-  },
-  rightActionText: {
-    color: theme.color.primary,
-    fontWeight: 'bold',
-    fontSize: theme.fontSize.md,
+    // alignItems: 'flex-end',
+    justifyItems: 'center',
+    backgroundColor: theme.color.primary,
+    marginVertical: 20,
+    marginHorizontal: 10,
+    padding: 16,
+    // paddingBottom: 12,
+    // paddingHorizontal: 16,
+    borderRadius: 20,
   },
 });

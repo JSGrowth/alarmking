@@ -6,6 +6,7 @@ import {AlarmType, deleteAlarmById, switchAlarmById} from '../libs/alarm';
 import moment from 'moment';
 import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
 import theme from '../styles/theme';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const ListItem = (props: AlarmType) => {
   const {setUpdated} = useAlarmUpdate();
@@ -41,15 +42,15 @@ const renderRightActions = (
   dragAnimatedValue: Animated.AnimatedInterpolation<any>,
 ) => {
   const scale = dragAnimatedValue.interpolate({
-    inputRange: [-50, 0],
-    outputRange: [1, 1],
+    inputRange: [-50, -30, 0],
+    outputRange: [1, 0, 0],
     extrapolate: 'clamp',
   });
 
   return (
     <Animated.View style={[styles.rightActionView, {transform: [{scale}]}]}>
       <TouchableOpacity>
-        <Text style={styles.rightActionText}>Delete</Text>
+        <Icon name="trash" size={30} />
       </TouchableOpacity>
     </Animated.View>
   );

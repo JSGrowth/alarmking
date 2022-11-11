@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <SafeAreaView style={[{flex: 1, backgroundColor: theme.color.black}]}>
       <ScrollEnabledProvider>
-        <View style={[styles.view]}>
+        <View>
           <FlatList
             scrollEnabled={scrollEnabled}
             data={alarmList}
@@ -73,7 +73,3 @@ export default function Home() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  view: {flex: 1},
-  text: {marginRight: 10, fontSize: 20},
-});
