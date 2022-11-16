@@ -31,7 +31,7 @@ export default function Home() {
             {
               fontFamily: 'NotoSansKR-Regular',
               fontSize: theme.fontSize.md,
-              color: '#8256FF',
+              color: theme.color.text_primary,
             },
           ]}>
           편집
@@ -40,7 +40,7 @@ export default function Home() {
       headerRight: () => (
         <Icon
           name="add"
-          color="#8256FF"
+          color={theme.color.text_primary}
           size={30}
           onPress={() =>
             navigation.navigate({key: 'AddAlarmModal', name: 'AddAlarmModal'})
