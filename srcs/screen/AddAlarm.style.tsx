@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {MD2Colors as Colors} from 'react-native-paper';
+import theme from '../styles/theme';
 
 export const styles = StyleSheet.create({
   view: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: theme.color.black,
   },
   tapListView: {
     flexDirection: 'column',
@@ -14,7 +15,6 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     borderRadius: 5,
-    backgroundColor: Colors.grey200,
   },
   tapItemView: {
     flexDirection: 'row',

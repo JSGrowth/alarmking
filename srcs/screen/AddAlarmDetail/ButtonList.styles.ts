@@ -1,33 +1,34 @@
 import {StyleSheet} from 'react-native';
-import {MD2Colors as Colors} from 'react-native-paper';
+import theme from '../../styles/theme';
+
+const color = theme.color;
 
 export const styles = StyleSheet.create({
+  headerRight: {
+    fontFamily: 'NotoSansKR-Regular',
+    fontSize: theme.fontSize.md,
+    color: theme.color.primary,
+  },
   view: {
     flex: 1,
-    flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: color.black,
   },
   tapListView: {
     flexDirection: 'column',
     alignSelf: 'center',
     width: '100%',
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.grey200,
   },
   tapItemView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: 'transparent',
-    marginLeft: 12,
-    marginRight: 12,
-    margin: 10,
+    margin: 8,
   },
-  separator: {
-    height: 1,
-    marginHorizontal: 20,
-    backgroundColor: 'lightgray',
+  tapItemText: {
+    fontFamily: 'NotoSansKR-Regular',
+    fontSize: theme.fontSize.lg,
+    color: theme.color.grey600,
   },
 });
