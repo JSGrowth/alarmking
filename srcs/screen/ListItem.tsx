@@ -50,7 +50,7 @@ const renderRightActions = (
   return (
     <Animated.View style={[styles.rightActionView, {transform: [{scale}]}]}>
       <TouchableOpacity>
-        <Icon name="trash" size={30} />
+        <Icon name="trash" color="#FFFFFF" size={30} />
       </TouchableOpacity>
     </Animated.View>
   );

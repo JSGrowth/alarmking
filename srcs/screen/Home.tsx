@@ -31,7 +31,7 @@ export default function Home() {
             {
               fontFamily: 'NotoSansKR-Regular',
               fontSize: theme.fontSize.md,
-              color: theme.color.primary,
+              color: '#8256FF',
             },
           ]}>
           편집
@@ -40,7 +40,7 @@ export default function Home() {
       headerRight: () => (
         <Icon
           name="add"
-          color={theme.color.primary}
+          color="#8256FF"
           size={30}
           onPress={() =>
             navigation.navigate({key: 'AddAlarmModal', name: 'AddAlarmModal'})
@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <SafeAreaView style={[{flex: 1, backgroundColor: theme.color.black}]}>
       <ScrollEnabledProvider>
-        <View>
+        <View style={{flex: 1}}>
           <FlatList
             scrollEnabled={scrollEnabled}
             data={alarmList}

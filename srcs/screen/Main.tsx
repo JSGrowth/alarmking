@@ -3,7 +3,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {NavigatorScreenParams} from '@react-navigation/native';
+import {NavigatorScreenParams, ThemeProvider} from '@react-navigation/native';
 import Home from './Home';
 import AddAlarm from './AddAlarm';
 import Message from './AddAlarmDetail/Message';
@@ -49,7 +49,11 @@ const Main = () => {
         <RootStack.Screen
           name="Home"
           component={Home}
-          options={{title: '👑alarmking', headerTintColor: theme.color.white}}
+          options={{
+            title: '👑alarmking',
+            // headerStyle: {backgroundColor: theme.color.white},
+            headerTintColor: theme.color.white,
+          }}
         />
         <RootStack.Screen
           name="AddAlarmModal"

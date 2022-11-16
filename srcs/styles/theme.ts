@@ -1,5 +1,6 @@
 export const color = {
   primary: '#6934FF',
+  text_primary: '#8256FF',
   deactivated_grey: '#303030',
   grey30: '#303030',
   grey600: '#757575',

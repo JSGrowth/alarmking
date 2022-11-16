@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 12,
     paddingHorizontal: 16,
-    borderRadius: 4,
+    // borderRadius: 4,
     // opacity: 0.5, // 0 ~ 1
     backgroundColor: theme.color.grey30,
   },
@@ -36,15 +36,20 @@ export const styles = StyleSheet.create({
 
   /* Swipeables */
   rightActionView: {
+    flex: 1,
     justifyContent: 'center',
-    // alignItems: 'flex-end',
+    alignItems: 'flex-end',
     justifyItems: 'center',
+    //todo: color: system error
+    // borderStyle: '#FF3B30',
+    borderWidth: 1,
+    // borderColor: '#FF4539',
     backgroundColor: theme.color.primary,
-    marginVertical: 20,
+    marginVertical: 8,
     marginHorizontal: 10,
     padding: 16,
     // paddingBottom: 12,
     // paddingHorizontal: 16,
-    borderRadius: 20,
+    // borderRadius: 4,
   },
 });
