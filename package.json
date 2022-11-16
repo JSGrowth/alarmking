@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator='iPhone 14'",
     "start": "react-native start",
+	"build-android": "cd android && ./gradlew clean build",
+	"build-ios": "cd ios && pod install",
+	"build": "yarn && yarn build-android && yarn build-ios",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
