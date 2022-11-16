@@ -3,25 +3,26 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Text, View, Switch, FlatList} from 'react-native';
+import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import {ModalStackParamList} from './Main';
-import {createAlarm} from '../libs/alarm';
-import {styles} from './AddAlarm.style';
-import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
-import {useCreateAlarm, updateAction} from '../contexts/CreateAlarm';
-import theme from '../styles/theme';
+import {ModalStackParamList} from '../Main';
+import {createAlarm} from '../../libs/alarm';
+import {useAlarmUpdate} from '../../contexts/useAlarmUpdate';
+import {useCreateAlarm, updateAction} from '../../contexts/CreateAlarm';
+import theme from '../../common/theme';
 
 type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
 
-const AddAlarm = () => {
+export default function AddAlarm() {
   const navigation = useNavigation<AlarmScreenProp>();
   const {setUpdated} = useAlarmUpdate();
   const {state, dispatch} = useCreateAlarm();
   const handleDate = (event: DateTimePickerEvent, date?: Date) => {
-    if (date) dispatch(updateAction('date', date));
+    if (date) {
+      dispatch(updateAction('date', date));
+    }
   };
   // const handleCreate = useCallback(() => {
   //   console.log(state);
@@ -127,6 +128,35 @@ const AddAlarm = () => {
       </View>
     </View>
   );
-};
+}
 
-export default AddAlarm;
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: theme.color.black,
+  },
+  tapListView: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+    width: '90%',
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 5,
+  },
+  tapItemView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'transparent',
+    marginLeft: 12,
+    marginRight: 12,
+    margin: 10,
+  },
+  separator: {
+    height: 1,
+    marginHorizontal: 20,
+    backgroundColor: 'lightgray',
+  },
+});

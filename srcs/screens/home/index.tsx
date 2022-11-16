@@ -2,12 +2,13 @@ import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, SafeAreaView, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from './Main';
+import {RootStackParamList} from '../Main';
 import {StackNavigationProp} from '@react-navigation/stack';
-import ListItem from './ListItem';
-import {AlarmType, getAlarms} from '../libs/alarm';
-import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
-import theme from '../styles/theme';
+import {getAlarms} from '../../libs/alarm';
+import {useAlarmUpdate} from '../../contexts/useAlarmUpdate';
+import theme from '../../common/theme';
+import {AlarmType} from '@common/type';
+import ListItem from './components/ListItem';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 

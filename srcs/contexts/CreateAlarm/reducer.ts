@@ -1,4 +1,4 @@
-import {SOUND} from '../../libs/alarm';
+import {SOUND} from '@common/constant';
 import {CreateAlatmType, UpdateAction} from './types';
 
 export const initialState: CreateAlatmType = {
