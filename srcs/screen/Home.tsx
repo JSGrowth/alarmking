@@ -1,20 +1,17 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
+import {FlatList, SafeAreaView, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ScrollEnabledProvider, useScrollEnabled} from '../contexts';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from './Main';
 import {StackNavigationProp} from '@react-navigation/stack';
 import ListItem from './ListItem';
-import {AlarmType, deleteAllAlarms, getAlarms} from '../libs/alarm';
+import {AlarmType, getAlarms} from '../libs/alarm';
 import {useAlarmUpdate} from '../contexts/useAlarmUpdate';
 import theme from '../styles/theme';
-import {Text} from 'react-native-paper';
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function Home() {
-  const [scrollEnabled] = useScrollEnabled();
   const navigation = useNavigation<homeScreenProp>();
   const [alarmList, setAlarmList] = useState<AlarmType>([]);
   const {updated, setUpdated} = useAlarmUpdate();
@@ -58,18 +55,16 @@ export default function Home() {
 
   return (
     <SafeAreaView style={[{flex: 1, backgroundColor: theme.color.black}]}>
-      <ScrollEnabledProvider>
-        <View style={{flex: 1}}>
-          <FlatList
-            scrollEnabled={scrollEnabled}
-            data={alarmList}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={(result: {item: AlarmType}) => (
-              <ListItem {...result.item} />
-            )}
-          />
-        </View>
-      </ScrollEnabledProvider>
+      <View style={{flex: 1}}>
+        <FlatList
+          scrollEnabled={true}
+          data={alarmList}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={(result: {item: AlarmType}) => (
+            <ListItem {...result.item} />
+          )}
+        />
+      </View>
     </SafeAreaView>
   );
 }
