@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction, useRef} from 'react';
-import {RectButton, Swipeable} from 'react-native-gesture-handler';
+import {Swipeable} from 'react-native-gesture-handler';
 import {
   Animated,
   Pressable,
