@@ -20,7 +20,7 @@ const Repeat = () => {
         </Pressable>
       ),
     });
-  }, [navigation]);
+  }, []);
   return (
     <View style={styles.view}>
       <View style={styles.tapItemView}>

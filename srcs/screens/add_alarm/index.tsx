@@ -1,7 +1,4 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -14,6 +11,7 @@ import {
 } from '@srcs/contexts/CreateAlarm';
 import theme from '@common/theme';
 import {createAlarm} from '@srcs/libs/alarm';
+import DatePicker from 'react-native-date-picker';
 
 type addAlarmScreenProp = NativeStackScreenProps<
   RootStackParamList,
@@ -23,10 +21,7 @@ type addAlarmScreenProp = NativeStackScreenProps<
 export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
   const {setUpdated} = route.params;
   const {state, dispatch} = useCreateAlarm();
-  const handleDate = (event: DateTimePickerEvent, date?: Date) => {
-    if (date) dispatch(updateAction('date', date));
-  };
-  useEffect(() => dispatch(resetAction()), [navigation]);
+  useEffect(() => dispatch(resetAction()), []);
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -55,7 +50,7 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
         />
       ),
     });
-  }, [navigation]);
+  }, [state]);
 
   const optionData = [
     {title: '요일 반복', navigateTo: 'Repeat', value: '안 함'},
@@ -65,13 +60,14 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
 
   return (
     <View style={[styles.view]}>
-      <DateTimePicker
+      <DatePicker
         mode="time"
-        display="spinner"
-        locale={'en_GB'}
-        value={state.date}
-        onChange={handleDate}
-        themeVariant={'dark'}
+        textColor={theme.color.white}
+        androidVariant="iosClone"
+        locale="fr" //for 24 hour format on IOS
+        is24hourSource="locale" //for 24 hour format on android
+        date={state.date}
+        onDateChange={picked => dispatch(updateAction('date', picked))}
       />
       <View style={[styles.tapListView]}>
         <FlatList

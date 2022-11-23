@@ -31,7 +31,7 @@ const Message = () => {
         </Pressable>
       ),
     });
-  }, [message, navigation]);
+  }, [message]);
 
   return (
     <View style={[styles.view]}>

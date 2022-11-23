@@ -41,7 +41,7 @@ export default function Home() {
         />
       ),
     });
-  }, [navigation]);
+  }, []);
   useEffect(() => {
     if (updated) {
       getAlarms().then(response => setAlarmList([...response]));

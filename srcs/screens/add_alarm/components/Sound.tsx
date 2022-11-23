@@ -27,7 +27,7 @@ const Song = () => {
         </Pressable>
       ),
     });
-  }, [sound, navigation]);
+  }, [sound]);
   return (
     <View style={styles.view}>
       <View style={[styles.tapListView]}>
