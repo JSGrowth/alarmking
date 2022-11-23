@@ -1,18 +1,17 @@
-import React, {Dispatch, MutableRefObject, RefObject} from 'react';
+import React from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {NavigatorScreenParams, ThemeProvider} from '@react-navigation/native';
-import Home from './Home';
-import AddAlarm from './AddAlarm';
-import Message from './AddAlarmDetail/Message';
-import Song from './AddAlarmDetail/Sound';
-import Repeat from './AddAlarmDetail/Repeat';
+import {NavigatorScreenParams} from '@react-navigation/native';
+import AddAlarm from './add_alarm';
+import Message from './add_alarm/components/Message';
+import Song from './add_alarm/components/Sound';
+import Repeat from './add_alarm/components/Repeat';
 import {AlarmUpdateProvider} from '../contexts/useAlarmUpdate';
 import {AlarmContextProvider} from '../contexts/CreateAlarm/context';
-import theme from '../styles/theme';
-import Icon from 'react-native-vector-icons/Ionicons';
+import theme from '../common/theme';
+import Home from './home';
 
 const modalScreenOption: NativeStackNavigationOptions = {
   headerStyle: {

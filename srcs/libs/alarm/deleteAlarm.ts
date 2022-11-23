@@ -2,7 +2,7 @@ import {
   deleteAlarmById as RNDeleteAlarmById,
   deleteAllAlarms as RNDeleteAllAlarms,
 } from 'react-native-simple-alarm';
-import {AlarmType} from '.';
+import {AlarmType} from '@common/type';
 
 export const deleteAlarmById = async (oid: AlarmType['oid']) => {
   if (oid) {
@@ -13,7 +13,9 @@ export const deleteAlarmById = async (oid: AlarmType['oid']) => {
     } catch (error) {
       console.log('deleting alarm by id error: ', error);
     }
-  } else console.log('OID of the alarm is undefined');
+  } else {
+    console.log('OID of the alarm is undefined');
+  }
 };
 
 export const deleteAllAlarms = async () => {

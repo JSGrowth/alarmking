@@ -1,7 +1,3 @@
-import {Alarm} from 'react-native-simple-alarm/dist/Types';
-
-export type AlarmType = Alarm;
-
 export enum SOUND {
   SOUND1 = 'Sound 1',
   SOUND2 = 'Sound 2',

@@ -1,11 +1,11 @@
 import React, {useLayoutEffect, useState} from 'react';
 import {Pressable, Text, TextInput, View} from 'react-native';
-import {AutoFocusProvider, useAutoFocus} from '../../contexts';
+import {AutoFocusProvider, useAutoFocus} from '../../../contexts';
 import {useNavigation} from '@react-navigation/native';
-import {ModalStackParamList} from '../Main';
+import {ModalStackParamList} from '../../Main';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useCreateAlarm, updateAction} from '../../contexts/CreateAlarm';
-import theme from '../../styles/theme';
+import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
+import theme from '../../../common/theme';
 import {styles} from './AlarmDetail.styles';
 
 type messageScreenProps = StackNavigationProp<ModalStackParamList, 'Message'>;

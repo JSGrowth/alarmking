@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
 import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
-import {REPEAT} from '../../libs/alarm';
+import {REPEAT} from '@common/constant';
 import {styles} from './ButtonList.styles';
 
 //  todo: repeatType?: 'week' | 'day' | 'hour' | 'minute' | 'time' | undefined; 뭐야...
