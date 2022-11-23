@@ -12,10 +12,11 @@ export const switchAlarmById = async (props: AlarmType) => {
           console.log('set false', JSON.stringify(response));
           //여기서 왜 시간이 지 맘대로 바뀌냐고
         });
-      } else
+      } else {
         await activateAlarmById(props.oid).then(response => {
           console.log('set true', response);
         });
+      }
     } catch (error) {
       console.log('in switchAlarmById: ', error);
     }
