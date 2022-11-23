@@ -1,7 +1,7 @@
 import {SOUND} from '@common/constant';
-import {Actions, CreateAlatmType} from './types';
+import {Actions, CreateAlarmType} from './types';
 
-export const initialState: CreateAlatmType = {
+export const initialState: CreateAlarmType = {
   active: true,
   date: new Date(),
   message: 'wake up ealry',

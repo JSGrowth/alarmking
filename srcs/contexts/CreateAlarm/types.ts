@@ -1,7 +1,7 @@
 import {AlarmType} from '@common/type';
 import type {Action} from 'redux';
 
-export type CreateAlatmType = AlarmType;
+export type CreateAlarmType = AlarmType;
 
 export type UpdateAction = Action<'@alarm/update'> & {
   propertyName: string;
