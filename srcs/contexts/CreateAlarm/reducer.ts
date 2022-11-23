@@ -1,5 +1,5 @@
-import {SOUND} from '../../libs/alarm';
-import {CreateAlatmType, UpdateAction} from './types';
+import {SOUND} from '@common/constant';
+import {Actions, CreateAlatmType} from './types';
 
 export const initialState: CreateAlatmType = {
   active: true,
@@ -9,15 +9,17 @@ export const initialState: CreateAlatmType = {
   soundName: SOUND.SOUND1,
 };
 
-const alarmReducer = (state = initialState, action: UpdateAction) => {
+const alarmReducer = (state = initialState, action: Actions) => {
   switch (action.type) {
     case '@alarm/update':
       console.log('update action ', action.propertyName, action.value);
       return {...state, [action.propertyName]: action.value};
+    case '@alarm/reset':
+      console.log('reset');
+      return {...initialState};
     default:
-      throw new Error(`No case for type ${action.type}`);
+      throw new Error(`No case for type ${action}`);
   }
-  return state;
 };
 
 export default alarmReducer;

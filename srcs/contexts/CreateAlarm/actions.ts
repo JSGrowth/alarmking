@@ -1,4 +1,4 @@
-import {UpdateAction} from './types';
+import {ResetAction, UpdateAction} from './types';
 
 export const updateAction = (
   propertyName: string,
@@ -7,4 +7,8 @@ export const updateAction = (
   type: '@alarm/update',
   propertyName,
   value,
+});
+
+export const resetAction = (): ResetAction => ({
+  type: '@alarm/reset',
 });

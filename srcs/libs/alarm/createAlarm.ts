@@ -1,11 +1,11 @@
 import {createAlarm as RNCreateAlarm} from 'react-native-simple-alarm';
-import {AlarmType} from '.';
+import {AlarmType} from '@common/type';
 
 export const createAlarm = async (props: AlarmType) => {
   const {active, date, message, snooze, soundName} = props;
   try {
     await RNCreateAlarm({
-      active: active,
+      active: true,
       date: date.toISOString(),
       message: message,
       snooze: snooze,

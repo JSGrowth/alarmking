@@ -1,6 +1,6 @@
 import {activateAlarmById, cancelAlarmById} from 'react-native-simple-alarm';
 import {editAlarm as RNEditAlarm} from 'react-native-simple-alarm';
-import {AlarmType} from '.';
+import {AlarmType} from '@common/type';
 import moment from 'moment';
 
 export const switchAlarmById = async (props: AlarmType) => {
