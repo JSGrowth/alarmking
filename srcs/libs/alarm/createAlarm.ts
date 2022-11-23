@@ -1,8 +1,8 @@
 import {createAlarm as RNCreateAlarm} from 'react-native-simple-alarm';
 import {AlarmType} from '@common/type';
 
-export const createAlarm = async (props: AlarmType) => {
-  const {active, date, message, snooze, soundName} = props;
+export const createAlarm = async (data: AlarmType) => {
+  const {active, date, message, snooze, soundName} = data;
   try {
     await RNCreateAlarm({
       active: true,
