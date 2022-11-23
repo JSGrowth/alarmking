@@ -3,19 +3,20 @@ import {editAlarm as RNEditAlarm} from 'react-native-simple-alarm';
 import {AlarmType} from '@common/type';
 import moment from 'moment';
 
-export const switchAlarmById = async (props: AlarmType) => {
-  const {oid, active} = props;
+export const switchAlarmById = async (data: AlarmType) => {
+  const {oid, active} = data;
   if (oid) {
     try {
       if (active) {
-        await cancelAlarmById(props.oid).then(response => {
+        await cancelAlarmById(data.oid).then(response => {
           console.log('set false', JSON.stringify(response));
           //여기서 왜 시간이 지 맘대로 바뀌냐고
         });
-      } else
-        await activateAlarmById(props.oid).then(response => {
+      } else {
+        await activateAlarmById(data.oid).then(response => {
           console.log('set true', response);
         });
+      }
     } catch (error) {
       console.log('in switchAlarmById: ', error);
     }
@@ -24,8 +25,8 @@ export const switchAlarmById = async (props: AlarmType) => {
   }
 };
 
-const editAlarm = async (props: AlarmType) => {
-  const {oid, active, date, message, snooze} = props;
+const editAlarm = async (data: AlarmType) => {
+  const {oid, active, date, message, snooze} = data;
 
   // const localTimeZoneStr = Localize.getTimeZone().toString();
   // const timePickedTz = moment(date).tz(localTimeZoneStr).format();

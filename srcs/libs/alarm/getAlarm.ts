@@ -1,3 +1,4 @@
+import {AlarmType} from '@common/type';
 import {getAlarms as RNGetAlarms} from 'react-native-simple-alarm';
 import {getAlarmById as RNGetAlarmById} from 'react-native-simple-alarm';
 
@@ -11,7 +12,7 @@ export const getAlarms = async () => {
   }
 };
 
-export const getAlarmById = async (oid: string | number) => {
+export const getAlarmById = async (oid: AlarmType['oid']) => {
   try {
     return await RNGetAlarmById(oid);
   } catch (e) {
