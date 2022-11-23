@@ -1,5 +1,5 @@
+import theme from '@common/theme';
 import {StyleSheet} from 'react-native';
-import theme from '../../../common/theme';
 
 const color = theme.color;
 

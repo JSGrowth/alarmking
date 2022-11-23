@@ -2,14 +2,14 @@ import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {ModalStackParamList} from '../../Main';
 import {styles} from './ButtonList.styles';
 import {SOUND} from '@common/constant';
 import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme from '../../../common/theme';
+import {RootStackParamList} from 'App';
+import theme from '@common/theme';
 
-type songScreenProps = StackNavigationProp<ModalStackParamList, 'Song'>;
+type songScreenProps = StackNavigationProp<RootStackParamList, 'Song'>;
 
 const Song = () => {
   const navigation = useNavigation<songScreenProps>();

@@ -1,24 +1,50 @@
-import React from 'react';
-import {Swipeable, TouchableOpacity} from 'react-native-gesture-handler';
-import {Animated, StyleSheet, Switch, Text, View} from 'react-native';
+import React, {Dispatch, SetStateAction, useRef} from 'react';
+import {RectButton, Swipeable} from 'react-native-gesture-handler';
+import {
+  Animated,
+  Pressable,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+} from 'react-native';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '@common/theme';
 import {AlarmType} from '@common/type';
 import {deleteAlarmById, switchAlarmById} from '@srcs/libs/alarm';
-import {useAlarmUpdate} from '../../../contexts';
-// import {useAlarmUpdate} from 'srcs/contexts';
 
-export default function ListItem(props: AlarmType) {
-  const {setUpdated} = useAlarmUpdate();
-  const {oid, active, date, message} = props;
+type listItemProps = AlarmType & {setUpdate: Dispatch<SetStateAction<boolean>>};
+
+export default function ListItem(props: listItemProps) {
+  const {oid, active, date, message, setUpdated} = props;
+
+  const renderRightActions = (
+    progress: Animated.AnimatedInterpolation<any>,
+    dragAnimatedValue: Animated.AnimatedInterpolation<any>,
+  ) => {
+    const scale = dragAnimatedValue.interpolate({
+      inputRange: [-50, 0],
+      outputRange: [0, 5],
+    });
+    return (
+      <Animated.View
+        style={[styles.rightActionView, {transform: [{translateX: scale}]}]}>
+        <Pressable
+          style={({pressed}) => [{opacity: pressed ? 0.2 : 1}]}
+          onPress={() => deleteAlarmById(oid).then(() => setUpdated(true))}>
+          <Icon name="trash" color="#FFFFFF" size={30} />
+        </Pressable>
+      </Animated.View>
+    );
+  };
+
   return (
     <Swipeable
+      childrenContainerStyle={{backgroundColor: theme.color.black}}
       renderRightActions={(progress, dragAnimatedValue) =>
         renderRightActions(progress, dragAnimatedValue)
-      }
-      friction={1.5}
-      onSwipeableOpen={() => deleteAlarmById(oid).then(() => setUpdated(true))}>
+      }>
       <View
         style={active ? styles.itemView : [styles.itemView, {opacity: 0.35}]}>
         <View style={[styles.timeView]}>
@@ -37,25 +63,6 @@ export default function ListItem(props: AlarmType) {
     </Swipeable>
   );
 }
-
-const renderRightActions = (
-  progress: Animated.AnimatedInterpolation<any>,
-  dragAnimatedValue: Animated.AnimatedInterpolation<any>,
-) => {
-  const scale = dragAnimatedValue.interpolate({
-    inputRange: [-50, -30, 0],
-    outputRange: [1, 0, 0],
-    extrapolate: 'clamp',
-  });
-
-  return (
-    <Animated.View style={[styles.rightActionView, {transform: [{scale}]}]}>
-      <TouchableOpacity>
-        <Icon name="trash" color="#FFFFFF" size={30} />
-      </TouchableOpacity>
-    </Animated.View>
-  );
-};
 
 const styles = StyleSheet.create({
   itemView: {
@@ -90,15 +97,10 @@ const styles = StyleSheet.create({
 
   /* Swipeables */
   rightActionView: {
-    flex: 1,
+    width: '15%',
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    justifyItems: 'center',
-    //todo: color: system error
-    borderWidth: 1,
-    backgroundColor: theme.color.primary,
+    alignItems: 'center',
+    // backgroundColor: theme.color.error,
     marginVertical: 8,
-    marginHorizontal: 10,
-    padding: 16,
   },
 });

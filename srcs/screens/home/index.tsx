@@ -2,36 +2,33 @@ import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {FlatList, SafeAreaView, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackParamList} from '../Main';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {getAlarms} from '../../libs/alarm';
-import {useAlarmUpdate} from '../../contexts/useAlarmUpdate';
 import theme from '../../common/theme';
 import {AlarmType} from '@common/type';
 import ListItem from './components/ListItem';
+import {RootStackParamList} from 'App';
 
-type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+/*
+We recommend creating a separate types.tsx file where you keep
+the types and import them in your component files
+instead of repeating them in each file.
+*/
+type homeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function Home() {
   const navigation = useNavigation<homeScreenProp>();
   const [alarmList, setAlarmList] = useState<AlarmType>([]);
-  const {updated, setUpdated} = useAlarmUpdate();
+  const [updated, setUpdated] = useState<boolean>(true);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: {
-        backgroundColor: 'black',
-      },
-      headerTitle: '👑alarmking',
-      headerTintColor: theme.color.white,
       headerLeft: () => (
         <Text
-          style={[
-            {
-              fontFamily: 'NotoSansKR-Regular',
-              fontSize: theme.fontSize.md,
-              color: theme.color.text_primary,
-            },
-          ]}>
+          style={{
+            fontFamily: 'NotoSansKR-Regular',
+            fontSize: theme.fontSize.md,
+            color: theme.color.text_primary,
+          }}>
           편집
         </Text>
       ),
@@ -40,9 +37,7 @@ export default function Home() {
           name="add"
           color={theme.color.text_primary}
           size={30}
-          onPress={() =>
-            navigation.navigate({key: 'AddAlarmModal', name: 'AddAlarmModal'})
-          }
+          onPress={() => navigation.navigate('AddAlarm', {setUpdated})}
         />
       ),
     });
@@ -60,9 +55,9 @@ export default function Home() {
         <FlatList
           scrollEnabled={true}
           data={alarmList}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item.oid}
           renderItem={(result: {item: AlarmType}) => (
-            <ListItem {...result.item} />
+            <ListItem {...result.item} setUpdated={setUpdated} />
           )}
         />
       </View>

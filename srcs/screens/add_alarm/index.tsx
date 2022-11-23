@@ -1,56 +1,51 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/native';
-import {ModalStackParamList} from '../Main';
-import {createAlarm} from '../../libs/alarm';
-import {useAlarmUpdate} from '../../contexts/useAlarmUpdate';
-import {useCreateAlarm, updateAction} from '../../contexts/CreateAlarm';
-import theme from '../../common/theme';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from 'App';
+import {
+  resetAction,
+  updateAction,
+  useCreateAlarm,
+} from '@srcs/contexts/CreateAlarm';
+import theme from '@common/theme';
+import {createAlarm} from '@srcs/libs/alarm';
 
-type AlarmScreenProp = StackNavigationProp<ModalStackParamList, 'AddAlarm'>;
+type addAlarmScreenProp = NativeStackScreenProps<
+  RootStackParamList,
+  'AddAlarm'
+>;
 
-export default function AddAlarm() {
-  const navigation = useNavigation<AlarmScreenProp>();
-  const {setUpdated} = useAlarmUpdate();
+export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
+  const {setUpdated} = route.params;
   const {state, dispatch} = useCreateAlarm();
   const handleDate = (event: DateTimePickerEvent, date?: Date) => {
-    if (date) {
-      dispatch(updateAction('date', date));
-    }
+    if (date) dispatch(updateAction('date', date));
   };
-  // const handleCreate = useCallback(() => {
-  //   console.log(state);
-  //   createAlarm({...state}).then(() => {
-  //     setUpdated(true);
-  //     navigation.goBack();
-  //   });
-  // }, [state]);
-  // todo: state 변경마다 re render?? optimal하게 바꿔보기
+  useEffect(() => dispatch(resetAction()), [navigation]);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: {
-        backgroundColor: 'black',
-      },
-      headerTintColor: theme.color.white,
       headerLeft: () => (
         <Icon
           name="ios-chevron-back"
           size={30}
-          style={{color: theme.color.primary}}
-          onPress={() => navigation.goBack()}
+          style={{borderRadius: 4, color: theme.color.primary}}
+          onPress={navigation.goBack}
         />
       ),
       headerRight: () => (
         <Icon
-          name="checkmark-sharp"
+          name="checkmark"
           size={30}
-          style={{color: theme.color.primary}}
+          style={{
+            borderRadius: 4,
+            overflow: 'hidden',
+            color: theme.color.primary,
+          }}
           onPress={() =>
             createAlarm({...state}).then(() => {
               setUpdated(true);
@@ -60,7 +55,7 @@ export default function AddAlarm() {
         />
       ),
     });
-  }, [state, navigation]);
+  }, [navigation]);
 
   const optionData = [
     {title: '요일 반복', navigateTo: 'Repeat', value: '안 함'},
@@ -82,8 +77,7 @@ export default function AddAlarm() {
         <FlatList
           data={optionData}
           renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate(item.navigateTo)}>
+            <TouchableOpacity onPress={() => navigation.navigate('Repeat')}>
               <View style={[styles.tapItemView]}>
                 <Text
                   style={[

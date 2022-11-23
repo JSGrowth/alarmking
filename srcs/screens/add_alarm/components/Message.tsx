@@ -2,13 +2,13 @@ import React, {useLayoutEffect, useState} from 'react';
 import {Pressable, Text, TextInput, View} from 'react-native';
 import {AutoFocusProvider, useAutoFocus} from '../../../contexts';
 import {useNavigation} from '@react-navigation/native';
-import {ModalStackParamList} from '../../Main';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
-import theme from '../../../common/theme';
 import {styles} from './AlarmDetail.styles';
+import {RootStackParamList} from 'App';
+import theme from '@common/theme';
 
-type messageScreenProps = StackNavigationProp<ModalStackParamList, 'Message'>;
+type messageScreenProps = StackNavigationProp<RootStackParamList, 'Message'>;
 
 const Message = () => {
   const navigation = useNavigation<messageScreenProps>();
@@ -48,32 +48,4 @@ const Message = () => {
   );
 };
 
-// const styles = StyleSheet.create({
-//   view: {
-//     flex: 1,
-//     justifyContent: 'space-between',
-//     alignItems: 'center',
-//     backgroundColor: theme.color.black,
-//   },
-//   text: {
-//     marginTop: 30,
-//     fontSize: 18,
-//     color: color.grey99,
-//   },
-//   keyboardAwareFocus: {
-//     flex: 1,
-//     padding: 5,
-//     alignItems: 'center',
-//     justifyContent: 'flex-start',
-//   },
-//   textInput: {
-//     width: '95%',
-//     marginTop: 10,
-//     padding: 5,
-//     fontSize: 24,
-//     borderRadius: 5,
-//     backgroundColor: color.grey30,
-//     color: color.white,
-//   },
-// });
 export default Message;
