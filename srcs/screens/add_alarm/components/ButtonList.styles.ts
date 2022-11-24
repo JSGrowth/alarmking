@@ -1,5 +1,5 @@
+import theme from '@common/theme';
 import {StyleSheet} from 'react-native';
-import theme from '../../../common/theme';
 
 const color = theme.color;
 
@@ -11,20 +11,19 @@ export const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: color.black,
   },
   tapListView: {
     flexDirection: 'column',
-    alignSelf: 'center',
     width: '100%',
   },
   tapItemView: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignContent: 'center',
     backgroundColor: 'transparent',
-    margin: 8,
+    marginHorizontal: 16,
+    marginVertical: 8,
   },
   tapItemText: {
     fontFamily: 'NotoSansKR-Regular',
