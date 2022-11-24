@@ -2,7 +2,18 @@ import React, {createContext, FC, useContext, useReducer} from 'react';
 import alarmReducer, {initialState} from './reducer';
 import {CreateAlarmType} from './types';
 
-const CreateAlarmContext = createContext<CreateAlarmType>(initialState);
+type CreateAlarmContextType = {
+  state: CreateAlarmType;
+  dispatch: (value: any) => void;
+};
+const defaultCreateAlarmContext = {
+  state: initialState,
+  dispatch: (value: any) => {},
+};
+
+const CreateAlarmContext = createContext<CreateAlarmContextType>(
+  defaultCreateAlarmContext,
+);
 
 type CreateAlarmContextProps = {
   children: React.ReactNode;

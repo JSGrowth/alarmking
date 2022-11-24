@@ -5,7 +5,7 @@ export const initialState: CreateAlarmType = {
   active: true,
   date: new Date(),
   message: 'wake up ealry',
-  snooze: 1,
+  // snooze: 1,
   soundName: SOUND.SOUND1,
 };
 

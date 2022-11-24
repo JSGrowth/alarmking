@@ -3,9 +3,9 @@ import {FlatList, SafeAreaView, View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {getAlarms} from '../../libs/alarm';
+// import {getAlarms} from '../../libs/alarm';
 import theme from '../../common/theme';
-import {AlarmType} from '@common/type';
+import {AlarmType} from '@common/types';
 import ListItem from './components/ListItem';
 import {RootStackParamList} from 'App';
 
@@ -18,7 +18,8 @@ type homeScreenProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 export default function Home() {
   const navigation = useNavigation<homeScreenProp>();
-  const [alarmList, setAlarmList] = useState<AlarmType>([]);
+  // const [alarmList, setAlarmList] = useState<AlarmType>();
+  const alarmList: AlarmType[] = [{id: '1', title: 'hello', repeatDays: []}];
   const [updated, setUpdated] = useState<boolean>(true);
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -44,7 +45,7 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (updated) {
-      getAlarms().then(response => setAlarmList([...response]));
+      // getAlarms().then(response => setAlarmList([...response]));
       setUpdated(false);
     }
   }, [updated]);
@@ -55,9 +56,16 @@ export default function Home() {
         <FlatList
           scrollEnabled={true}
           data={alarmList}
-          keyExtractor={item => item.oid}
+          keyExtractor={(item, index) => index.toString()}
           renderItem={(result: {item: AlarmType}) => (
-            <ListItem {...result.item} setUpdated={setUpdated} />
+            <ListItem
+              active={false}
+              date={new Date()}
+              message={'hello'}
+              soundName={'marimba'}
+              // {...result.item}
+              setUpdated={setUpdated}
+            />
           )}
         />
       </View>
