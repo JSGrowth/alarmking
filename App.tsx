@@ -47,7 +47,7 @@ const App = () => {
               <Icon
                 name="ios-chevron-back"
                 size={30}
-                style={{borderRadius: 4, color: theme.color.primary}}
+                style={{borderRadius: 4, color: theme.color.text_primary}}
                 onPress={navigation.navigation.goBack}
               />
             ),

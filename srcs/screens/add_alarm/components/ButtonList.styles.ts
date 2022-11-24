@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   headerRight: {
     fontFamily: 'NotoSansKR-Regular',
     fontSize: theme.fontSize.md,
-    color: theme.color.primary,
+    color: theme.color.text_primary,
   },
   view: {
     flex: 1,
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   tapItemView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     backgroundColor: 'transparent',
     margin: 8,
   },

@@ -10,7 +10,7 @@ import {
   useCreateAlarm,
 } from '@srcs/contexts/CreateAlarm';
 import theme from '@common/theme';
-import {createAlarm} from '@srcs/libs/alarm';
+// import {createAlarm} from '@srcs/libs/alarm';
 import DatePicker from 'react-native-date-picker';
 
 type addAlarmScreenProp = NativeStackScreenProps<
@@ -24,14 +24,6 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
   useEffect(() => dispatch(resetAction()), []);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <Icon
-          name="ios-chevron-back"
-          size={30}
-          style={{borderRadius: 4, color: theme.color.primary}}
-          onPress={navigation.goBack}
-        />
-      ),
       headerRight: () => (
         <Icon
           name="checkmark"
@@ -39,14 +31,14 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
           style={{
             borderRadius: 4,
             overflow: 'hidden',
-            color: theme.color.primary,
+            color: theme.color.text_primary,
           }}
-          onPress={() =>
-            createAlarm({...state}).then(() => {
-              setUpdated(true);
-              navigation.goBack();
-            })
-          }
+          onPress={() => {
+            // createAlarm({...state}).then(() => {
+            //   setUpdated(true);
+            // })
+            navigation.goBack();
+          }}
         />
       ),
     });
@@ -73,7 +65,8 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
         <FlatList
           data={optionData}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Repeat')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(item.navigateTo)}>
               <View style={[styles.tapItemView]}>
                 <Text
                   style={[
