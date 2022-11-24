@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     marginTop: 30,
     fontSize: 18,
     color: color.grey99,
+    fontFamily: 'NotoSansKR-Regular',
   },
   keyboardAwareFocus: {
     flex: 1,

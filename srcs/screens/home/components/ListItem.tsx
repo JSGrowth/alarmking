@@ -37,7 +37,7 @@ export default function ListItem(props: listItemProps) {
           style={({pressed}) => [{opacity: pressed ? 0.2 : 1}]}
           // onPress={() => deleteAlarmById(oid).then(() => setUpdated(true))}
         >
-          <Icon name="trash" color="#FFFFFF" size={30} />
+          <Icon name="trash" color={theme.color.primary} size={30} />
         </Pressable>
       </Animated.View>
     );

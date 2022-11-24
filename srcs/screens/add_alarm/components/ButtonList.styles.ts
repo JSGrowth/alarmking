@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
   },
   tapListView: {
     flexDirection: 'column',
+    marginTop: 24,
     width: '100%',
   },
   tapItemView: {
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: 'transparent',
     marginHorizontal: 16,
-    marginVertical: 8,
+    marginVertical: 4,
   },
   tapItemText: {
     fontFamily: 'NotoSansKR-Regular',

@@ -35,7 +35,7 @@ const Message = () => {
 
   return (
     <View style={[styles.view]}>
-      <Text style={[styles.text]}>set your message</Text>
+      <Text style={[styles.text]}>메세지를 입력하세요.</Text>
       <AutoFocusProvider contentContainerStyle={[styles.keyboardAwareFocus]}>
         <TextInput
           defaultValue={message}

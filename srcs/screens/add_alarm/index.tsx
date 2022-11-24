@@ -29,14 +29,13 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
           name="checkmark"
           size={30}
           style={{
-            borderRadius: 4,
-            overflow: 'hidden',
             color: theme.color.text_primary,
           }}
           onPress={() => {
             // createAlarm({...state}).then(() => {
             //   setUpdated(true);
             // })
+            // displayNotifee();
             navigation.goBack();
           }}
         />
@@ -64,6 +63,7 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
       <View style={[styles.tapListView]}>
         <FlatList
           data={optionData}
+          scrollEnabled={false}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => navigation.navigate(item.navigateTo)}>
