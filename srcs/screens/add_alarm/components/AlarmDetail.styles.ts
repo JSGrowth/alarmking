@@ -4,6 +4,11 @@ import {StyleSheet} from 'react-native';
 const color = theme.color;
 
 export const styles = StyleSheet.create({
+  headerRight: {
+    fontFamily: 'NotoSansKR-Regular',
+    fontSize: theme.fontSize.md,
+    color: theme.color.text_primary,
+  },
   view: {
     flex: 1,
     justifyContent: 'space-between',
@@ -30,5 +35,27 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: color.grey30,
     color: color.white,
+  },
+  listView: {
+    flex: 1,
+    backgroundColor: color.black,
+  },
+  tapListView: {
+    flexDirection: 'column',
+    marginTop: 24,
+    width: '100%',
+  },
+  tapItemView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    backgroundColor: 'transparent',
+    marginHorizontal: 16,
+    marginVertical: 4,
+  },
+  tapItemText: {
+    fontFamily: 'NotoSansKR-Regular',
+    fontSize: theme.fontSize.lg,
+    color: theme.color.grey600,
   },
 });

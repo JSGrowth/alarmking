@@ -2,12 +2,12 @@ import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {styles} from './ButtonList.styles';
 import {SOUND} from '@common/constant';
 import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {RootStackParamList} from 'App';
 import theme from '@common/theme';
+import Icon from '@common/Icon';
+import {styles} from './AlarmDetail.styles';
 
 type songScreenProps = StackNavigationProp<RootStackParamList, 'Song'>;
 
@@ -29,7 +29,7 @@ const Song = () => {
     });
   }, [sound]);
   return (
-    <View style={styles.view}>
+    <View style={styles.listView}>
       <View style={[styles.tapListView]}>
         <FlatList
           data={Object.values(SOUND)}
@@ -39,9 +39,9 @@ const Song = () => {
                 <Text style={styles.tapItemText}>{item}</Text>
                 {sound === item ? (
                   <Icon
-                    name="checkmark-sharp"
+                    name="Check"
                     size={20}
-                    color={theme.color.primary}
+                    color={theme.color.text_primary}
                   />
                 ) : null}
               </View>

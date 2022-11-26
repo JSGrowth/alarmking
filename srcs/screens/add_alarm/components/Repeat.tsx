@@ -2,12 +2,12 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useLayoutEffect} from 'react';
 import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {REPEAT} from '@common/constant';
-import {styles} from './ButtonList.styles';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from 'App';
 import {useCreateAlarm} from '@srcs/contexts/CreateAlarm';
-import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '@common/theme';
+import Icon from '@common/Icon';
+import {styles} from './AlarmDetail.styles';
 
 type songScreenProps = StackNavigationProp<RootStackParamList, 'Repeat'>;
 
@@ -39,11 +39,7 @@ const Repeat = () => {
               }}>
               <View style={styles.tapItemView}>
                 <Text style={styles.tapItemText}>{item}</Text>
-                <Icon
-                  name="checkmark-sharp"
-                  size={20}
-                  color={theme.color.primary}
-                />
+                <Icon name="Check" size={20} color={theme.color.text_primary} />
               </View>
             </TouchableOpacity>
           )}

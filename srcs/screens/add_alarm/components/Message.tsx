@@ -6,14 +6,12 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
 import {styles} from './AlarmDetail.styles';
 import {RootStackParamList} from 'App';
-import theme from '@common/theme';
 
 type messageScreenProps = StackNavigationProp<RootStackParamList, 'Message'>;
 
 const Message = () => {
   const navigation = useNavigation<messageScreenProps>();
   const {state, dispatch} = useCreateAlarm();
-  const color = theme.color;
   const [message, setMessage] = useState<string>(state.message);
   const focus = useAutoFocus();
   useLayoutEffect(() => {
@@ -24,10 +22,7 @@ const Message = () => {
             dispatch(updateAction('message', message));
             navigation.goBack();
           }}>
-          <Text
-            style={[{fontSize: 18, color: color.primary, fontWeight: '600'}]}>
-            Done
-          </Text>
+          <Text style={styles.headerRight}>Done</Text>
         </Pressable>
       ),
     });
