@@ -2,10 +2,8 @@ export const color = {
   primary: '#6934FF',
   text_primary: '#8256FF',
   error: '#FF4539',
-  deactivated_grey: '#303030',
-  grey30: '#303030',
-  grey600: '#757575',
-  grey99: '#999999',
+  background_grey: '#303030',
+  text_grey: '#999999',
   white: '#FFFFFF',
   black: '#000000',
 };
@@ -23,6 +21,15 @@ export const fontSize = {
   xl: 40,
 };
 
-const theme = {color, fontSize};
+export const fontFamily = {
+  black: 'NotoSansKR-Black',
+  bold: 'NotoSansKR-Bold',
+  light: 'NotoSansKR-Light',
+  medium: 'NotoSansKR-Medium',
+  regular: 'NotoSansKR-Regular',
+  thin: 'NotoSansKR-Thin',
+};
+
+const theme = {color, fontSize, fontFamily};
 
 export default theme;

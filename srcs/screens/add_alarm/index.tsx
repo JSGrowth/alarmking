@@ -36,7 +36,6 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
       ),
     });
   }, [state]);
-
   const optionData = [
     {title: '요일 반복', navigateTo: 'Repeat', value: '안 함'},
     {title: '이름', navigateTo: 'Message', value: state.message},
@@ -74,7 +73,7 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
                 </Text>
                 <Text
                   style={[
-                    {fontSize: theme.fontSize.sm, color: theme.color.grey99},
+                    {fontSize: theme.fontSize.sm, color: theme.color.text_grey},
                   ]}>
                   {item.value}
                 </Text>

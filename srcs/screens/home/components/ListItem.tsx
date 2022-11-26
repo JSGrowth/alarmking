@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 12,
     paddingHorizontal: 16,
-    backgroundColor: theme.color.grey30,
+    backgroundColor: theme.color.background_grey,
   },
 
   timeView: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   messageText: {
     fontSize: theme.fontSize.sm,
-    color: theme.color.grey99,
+    color: theme.color.text_grey,
     fontFamily: 'NotoSansKR-Regular',
   },
 
