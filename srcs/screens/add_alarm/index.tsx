@@ -1,5 +1,4 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -12,6 +11,7 @@ import {
 import theme from '@common/theme';
 // import {createAlarm} from '@srcs/libs/alarm';
 import DatePicker from 'react-native-date-picker';
+import Icon from '@common/Icon';
 
 type addAlarmScreenProp = NativeStackScreenProps<
   RootStackParamList,
@@ -26,16 +26,10 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
     navigation.setOptions({
       headerRight: () => (
         <Icon
-          name="checkmark"
+          name="Check"
           size={30}
-          style={{
-            color: theme.color.text_primary,
-          }}
+          color={theme.color.text_primary}
           onPress={() => {
-            // createAlarm({...state}).then(() => {
-            //   setUpdated(true);
-            // })
-            // displayNotifee();
             navigation.goBack();
           }}
         />

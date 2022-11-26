@@ -9,9 +9,9 @@ import {
   View,
 } from 'react-native';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '@common/theme';
 import {CreateAlarmType} from '@srcs/contexts/CreateAlarm';
+import Icon from '@common/Icon';
 // import {AlarmType} from '@common/types';
 // import {deleteAlarmById, switchAlarmById} from '@srcs/libs/alarm';
 
@@ -20,7 +20,7 @@ type listItemProps = CreateAlarmType & {
 };
 
 export default function ListItem(props: listItemProps) {
-  const {active, date, message, setUpdated} = props;
+  const {active, soundName, date, message, setUpdated} = props;
 
   const renderRightActions = (
     progress: Animated.AnimatedInterpolation<any>,
@@ -37,7 +37,7 @@ export default function ListItem(props: listItemProps) {
           style={({pressed}) => [{opacity: pressed ? 0.2 : 1}]}
           // onPress={() => deleteAlarmById(oid).then(() => setUpdated(true))}
         >
-          <Icon name="trash" color={theme.color.primary} size={30} />
+          <Icon name="Trash" color={theme.color.text_primary} size={30} />
         </Pressable>
       </Animated.View>
     );

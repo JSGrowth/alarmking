@@ -1,6 +1,5 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {FlatList, SafeAreaView, View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {FlatList, SafeAreaView, View, Text, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 // import {getAlarms} from '../../libs/alarm';
@@ -8,6 +7,8 @@ import theme from '../../common/theme';
 import {AlarmType} from '@common/types';
 import ListItem from './components/ListItem';
 import {RootStackParamList} from 'App';
+import Icon from '@common/Icon';
+// import {getAlarm} from '@srcs/libs/alarm/get';
 
 /*
 We recommend creating a separate types.tsx file where you keep
@@ -34,12 +35,10 @@ export default function Home() {
         </Text>
       ),
       headerRight: () => (
-        <Icon
-          name="add"
-          color={theme.color.text_primary}
-          size={30}
-          onPress={() => navigation.navigate('AddAlarm', {setUpdated})}
-        />
+        <Pressable
+          onPress={() => navigation.navigate('AddAlarm', {setUpdated})}>
+          <Icon name="Add" color={theme.color.text_primary} size={30} />
+        </Pressable>
       ),
     });
   }, []);
@@ -63,7 +62,6 @@ export default function Home() {
               date={new Date()}
               message={'hello'}
               soundName={'marimba'}
-              // {...result.item}
               setUpdated={setUpdated}
             />
           )}

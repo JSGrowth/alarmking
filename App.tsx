@@ -6,13 +6,14 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import theme from '@common/theme';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {AlarmContextProvider} from '@srcs/contexts/CreateAlarm';
 import Home from '@screens/home';
 import AddAlarm from '@screens/add_alarm';
 import Message from '@screens/add_alarm/components/Message';
 import Song from '@screens/add_alarm/components/Sound';
 import Repeat from '@screens/add_alarm/components/Repeat';
+import Icon from '@common/Icon';
+import {Pressable} from 'react-native';
 
 const modalScreenOption: NativeStackNavigationOptions = {
   headerStyle: {
@@ -44,12 +45,9 @@ const App = () => {
         <RootStack.Navigator
           screenOptions={navigation => ({
             headerLeft: () => (
-              <Icon
-                name="ios-chevron-back"
-                size={30}
-                style={{borderRadius: 4, color: theme.color.text_primary}}
-                onPress={navigation.navigation.goBack}
-              />
+              <Pressable onPress={navigation.navigation.goBack}>
+                <Icon name="Back" size={30} color={theme.color.text_primary} />
+              </Pressable>
             ),
             ...modalScreenOption,
           })}
