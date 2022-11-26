@@ -11,7 +11,7 @@ import {styles} from './AlarmDetail.styles';
 
 type songScreenProps = StackNavigationProp<RootStackParamList, 'Song'>;
 
-const Song = () => {
+export default function Song() {
   const navigation = useNavigation<songScreenProps>();
   const {state, dispatch} = useCreateAlarm();
   const [sound, setSound] = useState<string>(state.soundName);
@@ -29,14 +29,14 @@ const Song = () => {
     });
   }, [sound]);
   return (
-    <View style={styles.listView}>
-      <View style={[styles.tapListView]}>
+    <View style={styles.view}>
+      <View style={[styles.listView]}>
         <FlatList
           data={Object.values(SOUND)}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => setSound(item)}>
-              <View style={[styles.tapItemView]}>
-                <Text style={styles.tapItemText}>{item}</Text>
+              <View style={[styles.itemView]}>
+                <Text style={styles.itemText}>{item}</Text>
                 {sound === item ? (
                   <Icon
                     name="Check"
@@ -51,5 +51,4 @@ const Song = () => {
       </View>
     </View>
   );
-};
-export default Song;
+}

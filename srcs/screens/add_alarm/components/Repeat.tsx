@@ -11,7 +11,7 @@ import {styles} from './AlarmDetail.styles';
 
 type songScreenProps = StackNavigationProp<RootStackParamList, 'Repeat'>;
 
-const Repeat = () => {
+export default function Repeat() {
   const navigation = useNavigation<songScreenProps>();
   const {state, dispatch} = useCreateAlarm();
   useLayoutEffect(() => {
@@ -29,7 +29,7 @@ const Repeat = () => {
   }, []);
   return (
     <View style={styles.view}>
-      <View style={styles.tapListView}>
+      <View style={styles.listView}>
         <FlatList
           data={Object.values(REPEAT)}
           renderItem={({item}) => (
@@ -37,8 +37,8 @@ const Repeat = () => {
               onPress={() => {
                 navigation.goBack();
               }}>
-              <View style={styles.tapItemView}>
-                <Text style={styles.tapItemText}>{item}</Text>
+              <View style={styles.itemView}>
+                <Text style={styles.itemText}>{item}</Text>
                 <Icon name="Check" size={20} color={theme.color.text_primary} />
               </View>
             </TouchableOpacity>
@@ -47,6 +47,4 @@ const Repeat = () => {
       </View>
     </View>
   );
-};
-
-export default Repeat;
+}
