@@ -46,11 +46,8 @@ export default function ListItem(props: listItemProps) {
   return (
     <Swipeable
       childrenContainerStyle={{backgroundColor: theme.color.black}}
-      renderRightActions={(progress, dragAnimatedValue) =>
-        renderRightActions(progress, dragAnimatedValue)
-      }>
-      <View
-        style={active ? styles.itemView : [styles.itemView, {opacity: 0.35}]}>
+      renderRightActions={renderRightActions}>
+      <View style={viewStyle(active).itemView}>
         <View style={[styles.timeView]}>
           <Text style={[styles.timeText]}>{moment(date).format('HH:mm')}</Text>
           <Switch
@@ -67,7 +64,19 @@ export default function ListItem(props: listItemProps) {
     </Swipeable>
   );
 }
-
+const viewStyle = (active: boolean) =>
+  StyleSheet.create({
+    itemView: {
+      display: 'flex',
+      opacity: active ? 1 : 0.35,
+      flexDirection: 'column',
+      marginVertical: 8,
+      paddingTop: 4,
+      paddingBottom: 12,
+      paddingHorizontal: 16,
+      backgroundColor: theme.color.background_grey,
+    },
+  });
 const styles = StyleSheet.create({
   itemView: {
     display: 'flex',
