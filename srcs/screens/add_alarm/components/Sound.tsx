@@ -2,16 +2,16 @@ import React, {useLayoutEffect, useState} from 'react';
 import {FlatList, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {styles} from './ButtonList.styles';
 import {SOUND} from '@common/constant';
 import {useCreateAlarm, updateAction} from '../../../contexts/CreateAlarm';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {RootStackParamList} from 'App';
 import theme from '@common/theme';
+import Icon from '@common/Icon';
+import {styles} from './AlarmDetail.styles';
 
 type songScreenProps = StackNavigationProp<RootStackParamList, 'Song'>;
 
-const Song = () => {
+export default function Song() {
   const navigation = useNavigation<songScreenProps>();
   const {state, dispatch} = useCreateAlarm();
   const [sound, setSound] = useState<string>(state.soundName);
@@ -30,18 +30,18 @@ const Song = () => {
   }, [sound]);
   return (
     <View style={styles.view}>
-      <View style={[styles.tapListView]}>
+      <View style={[styles.listView]}>
         <FlatList
           data={Object.values(SOUND)}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => setSound(item)}>
-              <View style={[styles.tapItemView]}>
-                <Text style={styles.tapItemText}>{item}</Text>
+              <View style={[styles.itemView]}>
+                <Text style={styles.itemText}>{item}</Text>
                 {sound === item ? (
                   <Icon
-                    name="checkmark-sharp"
+                    name="Check"
                     size={20}
-                    color={theme.color.primary}
+                    color={theme.color.text_primary}
                   />
                 ) : null}
               </View>
@@ -51,5 +51,4 @@ const Song = () => {
       </View>
     </View>
   );
-};
-export default Song;
+}

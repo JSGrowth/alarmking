@@ -1,5 +1,4 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -10,8 +9,9 @@ import {
   useCreateAlarm,
 } from '@srcs/contexts/CreateAlarm';
 import theme from '@common/theme';
-import {createAlarm} from '@srcs/libs/alarm';
+// import {createAlarm} from '@srcs/libs/alarm';
 import DatePicker from 'react-native-date-picker';
+import Icon from '@common/Icon';
 
 type addAlarmScreenProp = NativeStackScreenProps<
   RootStackParamList,
@@ -24,34 +24,18 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
   useEffect(() => dispatch(resetAction()), []);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <Icon
-          name="ios-chevron-back"
-          size={30}
-          style={{borderRadius: 4, color: theme.color.primary}}
-          onPress={navigation.goBack}
-        />
-      ),
       headerRight: () => (
         <Icon
-          name="checkmark"
+          name="Check"
           size={30}
-          style={{
-            borderRadius: 4,
-            overflow: 'hidden',
-            color: theme.color.primary,
+          color={theme.color.text_primary}
+          onPress={() => {
+            navigation.goBack();
           }}
-          onPress={() =>
-            createAlarm({...state}).then(() => {
-              setUpdated(true);
-              navigation.goBack();
-            })
-          }
         />
       ),
     });
   }, [state]);
-
   const optionData = [
     {title: '요일 반복', navigateTo: 'Repeat', value: '안 함'},
     {title: '이름', navigateTo: 'Message', value: state.message},
@@ -72,8 +56,10 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
       <View style={[styles.tapListView]}>
         <FlatList
           data={optionData}
+          scrollEnabled={false}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Repeat')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(item.navigateTo)}>
               <View style={[styles.tapItemView]}>
                 <Text
                   style={[
@@ -87,7 +73,7 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
                 </Text>
                 <Text
                   style={[
-                    {fontSize: theme.fontSize.sm, color: theme.color.grey99},
+                    {fontSize: theme.fontSize.sm, color: theme.color.text_grey},
                   ]}>
                   {item.value}
                 </Text>

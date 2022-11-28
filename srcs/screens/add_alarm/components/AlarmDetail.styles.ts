@@ -1,33 +1,37 @@
 import theme from '@common/theme';
 import {StyleSheet} from 'react-native';
 
-const color = theme.color;
+const {color, fontSize, fontFamily} = theme;
 
 export const styles = StyleSheet.create({
+  headerRight: {
+    fontFamily: fontFamily.regular,
+    fontSize: fontSize.md,
+    color: color.text_primary,
+  },
   view: {
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: color.black,
   },
-  text: {
-    marginTop: 30,
-    fontSize: 18,
-    color: color.grey99,
+
+  listView: {
+    flexDirection: 'column',
+    marginTop: 24,
+    width: '100%',
   },
-  keyboardAwareFocus: {
-    flex: 1,
-    padding: 5,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+  itemView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    backgroundColor: 'transparent',
+    marginHorizontal: 16,
+    marginVertical: 4,
   },
-  textInput: {
-    width: '95%',
-    marginTop: 10,
-    padding: 5,
-    fontSize: 24,
-    borderRadius: 5,
-    backgroundColor: color.grey30,
-    color: color.white,
+  itemText: {
+    fontSize: fontSize.lg,
+    color: color.text_grey,
+    fontFamily: fontFamily.regular,
   },
 });

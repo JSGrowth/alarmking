@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Pressable, Text, TextInput, View} from 'react-native';
+import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import {AutoFocusProvider, useAutoFocus} from '../../../contexts';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -10,10 +10,11 @@ import theme from '@common/theme';
 
 type messageScreenProps = StackNavigationProp<RootStackParamList, 'Message'>;
 
-const Message = () => {
+const {color, fontFamily} = theme;
+
+export default function Message() {
   const navigation = useNavigation<messageScreenProps>();
   const {state, dispatch} = useCreateAlarm();
-  const color = theme.color;
   const [message, setMessage] = useState<string>(state.message);
   const focus = useAutoFocus();
   useLayoutEffect(() => {
@@ -24,10 +25,7 @@ const Message = () => {
             dispatch(updateAction('message', message));
             navigation.goBack();
           }}>
-          <Text
-            style={[{fontSize: 18, color: color.primary, fontWeight: '600'}]}>
-            Done
-          </Text>
+          <Text style={styles.headerRight}>Done</Text>
         </Pressable>
       ),
     });
@@ -35,17 +33,40 @@ const Message = () => {
 
   return (
     <View style={[styles.view]}>
-      <Text style={[styles.text]}>set your message</Text>
-      <AutoFocusProvider contentContainerStyle={[styles.keyboardAwareFocus]}>
+      <Text style={[messageStyles.text]}>메세지를 입력하세요.</Text>
+      <AutoFocusProvider
+        contentContainerStyle={[messageStyles.keyboardAwareFocus]}>
         <TextInput
           defaultValue={message}
           onChangeText={text => setMessage(text)}
           onFocus={focus}
-          style={[styles.textInput]}
+          style={[messageStyles.textInput]}
         />
       </AutoFocusProvider>
     </View>
   );
-};
+}
 
-export default Message;
+const messageStyles = StyleSheet.create({
+  text: {
+    marginTop: 30,
+    fontSize: 18,
+    color: color.text_grey,
+    fontFamily: fontFamily.regular,
+  },
+  keyboardAwareFocus: {
+    flex: 1,
+    padding: 5,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  textInput: {
+    width: '95%',
+    marginTop: 10,
+    padding: 5,
+    fontSize: 24,
+    borderRadius: 5,
+    backgroundColor: color.background_grey,
+    color: color.white,
+  },
+});

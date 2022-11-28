@@ -9,15 +9,18 @@ import {
   View,
 } from 'react-native';
 import moment from 'moment';
-import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '@common/theme';
-import {AlarmType} from '@common/type';
-import {deleteAlarmById, switchAlarmById} from '@srcs/libs/alarm';
+import {CreateAlarmType} from '@srcs/contexts/CreateAlarm';
+import Icon from '@common/Icon';
+// import {AlarmType} from '@common/types';
+// import {deleteAlarmById, switchAlarmById} from '@srcs/libs/alarm';
 
-type listItemProps = AlarmType & {setUpdate: Dispatch<SetStateAction<boolean>>};
+type listItemProps = CreateAlarmType & {
+  setUpdated: Dispatch<SetStateAction<boolean>>;
+};
 
 export default function ListItem(props: listItemProps) {
-  const {oid, active, date, message, setUpdated} = props;
+  const {active, soundName, date, message, setUpdated} = props;
 
   const renderRightActions = (
     progress: Animated.AnimatedInterpolation<any>,
@@ -32,8 +35,9 @@ export default function ListItem(props: listItemProps) {
         style={[styles.rightActionView, {transform: [{translateX: scale}]}]}>
         <Pressable
           style={({pressed}) => [{opacity: pressed ? 0.2 : 1}]}
-          onPress={() => deleteAlarmById(oid).then(() => setUpdated(true))}>
-          <Icon name="trash" color="#FFFFFF" size={30} />
+          // onPress={() => deleteAlarmById(oid).then(() => setUpdated(true))}
+        >
+          <Icon name="Trash" color={theme.color.text_primary} size={30} />
         </Pressable>
       </Animated.View>
     );
@@ -52,7 +56,7 @@ export default function ListItem(props: listItemProps) {
           <Switch
             trackColor={{true: theme.color.primary, false: theme.color.black}}
             value={active}
-            onChange={() => switchAlarmById(props).then(() => setUpdated(true))}
+            // onChange={() => switchAlarmById(props).then(() => setUpdated(true))}
           />
         </View>
         <View style={[styles.messageView]}>
@@ -72,7 +76,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 12,
     paddingHorizontal: 16,
-    backgroundColor: theme.color.grey30,
+    backgroundColor: theme.color.background_grey,
   },
 
   timeView: {
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
   },
   messageText: {
     fontSize: theme.fontSize.sm,
-    color: theme.color.grey99,
+    color: theme.color.text_grey,
     fontFamily: 'NotoSansKR-Regular',
   },
 
