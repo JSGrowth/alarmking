@@ -1,3 +1,5 @@
+import {Dimensions} from 'react-native';
+
 export enum SOUND {
   SOUND1 = 'Sound 1',
   SOUND2 = 'Sound 2',
@@ -16,3 +18,4 @@ export enum REPEAT {
   SATURDAY = '토요일',
   SUNDAY = '일요일',
 }
+export const {height: SCREEN_HEIGHT} = Dimensions.get('screen');
