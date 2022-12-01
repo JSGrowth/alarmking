@@ -1,7 +1,10 @@
 import React, {useEffect, useLayoutEffect} from 'react';
 import {Text, View, Switch, FlatList, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import {RootStackParamList} from 'App';
 import {
   resetAction,
@@ -9,7 +12,6 @@ import {
   useCreateAlarm,
 } from '@srcs/contexts/CreateAlarm';
 import theme from '@common/theme';
-// import {createAlarm} from '@srcs/libs/alarm';
 import DatePicker from 'react-native-date-picker';
 import Icon from '@common/Icon';
 
@@ -17,6 +19,35 @@ type addAlarmScreenProp = NativeStackScreenProps<
   RootStackParamList,
   'AddAlarm'
 >;
+
+type tapType = {
+  navigation: NativeStackNavigationProp<
+    RootStackParamList,
+    'AddAlarm',
+    undefined
+  >;
+  item: any;
+};
+const ScreenTap = ({navigation, item}: tapType) => {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(item.navigateTo)}>
+      <View style={[styles.tapItemView]}>
+        <Text
+          style={{
+            fontFamily: 'NotoSansKR-Medium',
+            fontSize: theme.fontSize.sm,
+            color: theme.color.white,
+          }}>
+          {item.navigateTo}
+        </Text>
+        <Text
+          style={[{fontSize: theme.fontSize.sm, color: theme.color.text_grey}]}>
+          {item.value}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
   const {setUpdated} = route.params;
@@ -29,9 +60,7 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
           name="Check"
           size={30}
           color={theme.color.text_primary}
-          onPress={() => {
-            navigation.goBack();
-          }}
+          onPress={navigation.goBack}
         />
       ),
     });
@@ -58,46 +87,24 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
           data={optionData}
           scrollEnabled={false}
           renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate(item.navigateTo)}>
-              <View style={[styles.tapItemView]}>
-                <Text
-                  style={[
-                    {
-                      fontFamily: 'NotoSansKR-Medium',
-                      fontSize: theme.fontSize.sm,
-                      color: theme.color.white,
-                    },
-                  ]}>
-                  {item.navigateTo}
-                </Text>
-                <Text
-                  style={[
-                    {fontSize: theme.fontSize.sm, color: theme.color.text_grey},
-                  ]}>
-                  {item.value}
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <ScreenTap navigation={navigation} item={item} />
           )}
         />
         <TouchableOpacity disabled={true}>
           <View style={[styles.tapItemView]}>
             <Text
-              style={[
-                {
-                  fontFamily: 'NotoSansKR-Medium',
-                  fontSize: theme.fontSize.sm,
-                  color: theme.color.white,
-                },
-              ]}>
+              style={{
+                fontFamily: 'NotoSansKR-Medium',
+                fontSize: theme.fontSize.sm,
+                color: theme.color.white,
+              }}>
               {/* todo: 지금 이 값 Active */}
               다시 알림
             </Text>
             <Switch
               trackColor={{true: theme.color.primary, false: theme.color.black}}
               value={state.active}
-              onValueChange={val => dispatch(updateAction('active', val))}
+              onValueChange={value => dispatch(updateAction('active', value))}
             />
           </View>
         </TouchableOpacity>
