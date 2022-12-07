@@ -66,7 +66,7 @@ export default function ListItem(props: listItemProps) {
                 (itemHeight + 16) * index - (listHeight - 200), // 16: margin, 200: header
                 (itemHeight + 16) * (index + 1) - (listHeight - 200),
               ],
-              outputRange: [0.5, 1],
+              outputRange: [0.6, 1],
             }),
           },
         ]}>
