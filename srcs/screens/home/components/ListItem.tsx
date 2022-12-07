@@ -1,4 +1,9 @@
-import React, {Dispatch, SetStateAction, useRef} from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import {Swipeable} from 'react-native-gesture-handler';
 import {
   Animated,
@@ -17,10 +22,14 @@ import Icon from '@common/Icon';
 
 type listItemProps = CreateAlarmType & {
   setUpdated: Dispatch<SetStateAction<boolean>>;
+  listHeight: number;
+  index: number;
+  scrollY: Animated.Value;
 };
 
 export default function ListItem(props: listItemProps) {
-  const {active, soundName, date, message, setUpdated} = props;
+  const {active, date, message, setUpdated, index, listHeight, scrollY} = props;
+  const [itemHeight, setItemHeight] = useState<number>(0);
 
   const renderRightActions = (
     progress: Animated.AnimatedInterpolation<any>,
@@ -46,11 +55,21 @@ export default function ListItem(props: listItemProps) {
   return (
     <Swipeable
       childrenContainerStyle={{backgroundColor: theme.color.black}}
-      renderRightActions={(progress, dragAnimatedValue) =>
-        renderRightActions(progress, dragAnimatedValue)
-      }>
-      <View
-        style={active ? styles.itemView : [styles.itemView, {opacity: 0.35}]}>
+      renderRightActions={renderRightActions}>
+      <Animated.View
+        onLayout={e => setItemHeight(e.nativeEvent.layout.height)}
+        style={[
+          viewStyle(active).itemView,
+          {
+            opacity: scrollY.interpolate({
+              inputRange: [
+                (itemHeight + 16) * index - (listHeight - 200), // 16: margin, 200: header
+                (itemHeight + 16) * (index + 1) - (listHeight - 200),
+              ],
+              outputRange: [0.6, 1],
+            }),
+          },
+        ]}>
         <View style={[styles.timeView]}>
           <Text style={[styles.timeText]}>{moment(date).format('HH:mm')}</Text>
           <Switch
@@ -63,11 +82,23 @@ export default function ListItem(props: listItemProps) {
           <Text style={[styles.messageText]}>{message}</Text>
           <Text style={[styles.messageText]}>{moment(date).fromNow()}</Text>
         </View>
-      </View>
+      </Animated.View>
     </Swipeable>
   );
 }
-
+const viewStyle = (active: boolean) =>
+  StyleSheet.create({
+    itemView: {
+      display: 'flex',
+      opacity: active ? 1 : 0.35,
+      flexDirection: 'column',
+      marginVertical: 8,
+      paddingTop: 4,
+      paddingBottom: 12,
+      paddingHorizontal: 16,
+      backgroundColor: theme.color.background_grey,
+    },
+  });
 const styles = StyleSheet.create({
   itemView: {
     display: 'flex',
