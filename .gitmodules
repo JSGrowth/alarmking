@@ -1,0 +1,3 @@
+[submodule "packages/react-native-alarm-library"]
+	path = packages/react-native-alarm-library
+	url = git@github.com:Chloekkk/react-native-alarm-library.git
