@@ -36,7 +36,12 @@ export default function AddAlarm({route, navigation}: addAlarmScreenProp) {
       ),
     });
   }, [state]);
-  const optionData = [
+  type optionType = {
+    title: string;
+    navigateTo: 'Repeat' | 'Message' | 'Song';
+    value: string;
+  };
+  const optionData: optionType[] = [
     {title: '요일 반복', navigateTo: 'Repeat', value: '안 함'},
     {title: '이름', navigateTo: 'Message', value: state.message},
     {title: '벨소리', navigateTo: 'Song', value: state.soundName},
