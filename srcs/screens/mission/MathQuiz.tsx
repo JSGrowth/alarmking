@@ -5,14 +5,16 @@ import OptionItem from './components/OptionItem';
 
 export default function MathQuiz() {
   const makeQuiz = () => {
-    const a = Math.floor(Math.random() * 100) + 1;
-    const b = Math.floor(Math.random() * 100) + 1;
-    const op = ['*', '+', '-'][Math.floor(Math.random() * 4)];
-    return a + ' ' + op + ' ' + b;
+    const a = Math.floor(Math.random() * 90) + 1;
+    const b = Math.floor(Math.random() * 90) + 1;
+    const c = Math.floor(Math.random() * 10) + 3;
+    const op = [' + ', ' - '][Math.floor(Math.random() * 2)];
+    return a + op + b + ' * ' + c;
   };
   const fadeOut = useRef(new Animated.Value(1)).current;
   const fadeIn = useRef(new Animated.Value(0)).current;
   const translationy = useRef(new Animated.Value(0)).current;
+  const quizTimeOver = useRef(new Animated.Value(1)).current;
   const quiz = makeQuiz();
   const answer = parseInt(eval(quiz));
   const optionData: number[] = [];
@@ -42,6 +44,7 @@ export default function MathQuiz() {
       animatedView(0.25, fadeOut, 1000, 0),
       animatedView(-100, translationy, 1000, 0),
       animatedView(1, fadeIn, 1000, 0),
+      animatedView(0.25, quizTimeOver, 12000, 0),
     ]).start();
   }, []);
 
@@ -59,15 +62,21 @@ export default function MathQuiz() {
           {quiz.replace('*', 'x')}
         </Animated.Text>
       </View>
-      <View style={{flex: 1}}>
+      <Animated.View style={{flex: 1, opacity: quizTimeOver}}>
         <FlatList
           data={optionData}
           numColumns={2}
           keyExtractor={item => item.toString()}
           contentContainerStyle={{flex: 1, justifyContent: 'flex-end'}}
-          renderItem={({item}) => <OptionItem value={item} answer={answer} />}
+          renderItem={({item}) => (
+            <OptionItem
+              value={item}
+              answer={answer}
+              handlePress={(item, answer) => item === answer}
+            />
+          )}
         />
-      </View>
+      </Animated.View>
     </SafeAreaView>
   );
 }
