@@ -3,13 +3,26 @@ import {Animated, FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import theme from '@common/theme';
 import OptionItem from './components/OptionItem';
 
-const optionData = [31, 16, 15, 40];
-
-export default function Math() {
+export default function MathQuiz() {
+  const makeQuiz = () => {
+    const a = Math.floor(Math.random() * 100) + 1;
+    const b = Math.floor(Math.random() * 100) + 1;
+    const op = ['*', '+', '-'][Math.floor(Math.random() * 4)];
+    return a + ' ' + op + ' ' + b;
+  };
   const fadeOut = useRef(new Animated.Value(1)).current;
   const fadeIn = useRef(new Animated.Value(0)).current;
   const translationy = useRef(new Animated.Value(0)).current;
-
+  const quiz = makeQuiz();
+  const answer = parseInt(eval(quiz));
+  const optionData: number[] = [];
+  for (let i = 0; i < 3; i++)
+    optionData.push(
+      answer +
+        Math.ceil(Math.random() * 20) * (Math.round(Math.random()) ? 1 : -1),
+    );
+  optionData.push(answer);
+  optionData.sort();
   const animatedView = (
     toValue: number,
     animatedRef: Animated.Value,
@@ -43,7 +56,7 @@ export default function Math() {
           07 : 30
         </Animated.Text>
         <Animated.Text style={[styles.text, {opacity: fadeIn}]}>
-          1 + 3 x 10
+          {quiz.replace('*', 'x')}
         </Animated.Text>
       </View>
       <View style={{flex: 1}}>
@@ -52,9 +65,7 @@ export default function Math() {
           numColumns={2}
           keyExtractor={item => item.toString()}
           contentContainerStyle={{flex: 1, justifyContent: 'flex-end'}}
-          renderItem={({item}) => (
-            <OptionItem value={item} answer={1 + 3 * 10} />
-          )}
+          renderItem={({item}) => <OptionItem value={item} answer={answer} />}
         />
       </View>
     </SafeAreaView>
