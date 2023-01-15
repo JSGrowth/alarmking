@@ -14,7 +14,7 @@ import Song from '@screens/add_alarm/components/Sound';
 import Repeat from '@screens/add_alarm/components/Repeat';
 import Icon from '@common/Icon';
 import {Pressable} from 'react-native';
-import Math from '@screens/mission/Math';
+import MathQuiz from '@screens/mission/MathQuiz';
 import Dictaion from '@screens/mission/Dictation';
 const modalScreenOption: NativeStackNavigationOptions = {
   headerStyle: {
@@ -66,8 +66,8 @@ const App = () => (
   //     </RootStack.Navigator>
   //   </AlarmContextProvider>
   // </NavigationContainer>
-  // <Math />
-  <Dictaion />
+  <MathQuiz />
+  // <Dictaion />
 );
 
 export default App;
