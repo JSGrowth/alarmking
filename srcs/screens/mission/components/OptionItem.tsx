@@ -1,41 +1,18 @@
+import React from 'react';
 import theme, {fontSize} from '@common/theme';
-import React, {useRef} from 'react';
-import {Animated, Pressable, StyleSheet} from 'react-native';
+import {Animated, Pressable, StyleSheet, Text, View} from 'react-native';
 
 type optionPropsType = {
   value: number;
   answer: number;
+  handlePress: (answer: number, value: number) => boolean;
 };
 
-export default function OptionItem({value, answer}: optionPropsType) {
-  const anValue = useRef(new Animated.Value(0)).current;
-  const colorAnimatedTo =
-    value === answer ? theme.color.text_primary : theme.color.error;
-  const handlePress = () => {
-    Animated.timing(anValue, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start(() => {
-      Animated.timing(anValue, {
-        toValue: 1,
-        duration: 1000,
-        useNativeDriver: true,
-      }).start();
-    });
-  };
-  const colorInterpolation = anValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [theme.color.text_grey, colorAnimatedTo],
-  });
-
+export default function OptionItem({value, handlePress}: optionPropsType) {
   return (
     <Animated.View style={[styles.view]}>
-      <Pressable onPress={handlePress} style={[styles.button]}>
-        <Animated.Text
-          style={[styles.text, {color: colorInterpolation}]}
-          children={`${value}`}
-        />
+      <Pressable onPress={() => handlePress} style={[styles.button]}>
+        <Animated.Text style={[styles.text]} children={`${value}`} />
       </Pressable>
     </Animated.View>
   );
@@ -47,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderStyle: 'solid',
     borderColor: color.text_grey,
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 30,
     marginHorizontal: 16,
     marginVertical: 12,
@@ -58,7 +35,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: color.white,
-    fontFamily: fontFamily.light,
+    fontFamily: fontFamily.regular,
     fontSize: fontSize.lg,
   },
 });
