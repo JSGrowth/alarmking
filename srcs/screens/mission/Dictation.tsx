@@ -13,6 +13,7 @@ import theme from '@common/theme';
 const dictation = '이미 늦음 이미 늦음 이미 늦음 이미 늦음 이미 늦음 ';
 
 export default function Dictaion() {
+  const answer = dictation.trim();
   const [text, setText] = useState<string>('');
   const fadeOut = useRef(new Animated.Value(1)).current;
   const fadeIn = useRef(new Animated.Value(0)).current;
@@ -40,7 +41,7 @@ export default function Dictaion() {
   }, []);
 
   const handleSubmit = () => {
-    console.log(text);
+    answer === text ? console.log('Correct!') : console.log('Wrong answer!');
   };
 
   return (
@@ -61,7 +62,7 @@ export default function Dictaion() {
             07 : 30
           </Animated.Text>
           <Animated.Text style={[styles.text, {opacity: fadeIn}]}>
-            {dictation}
+            {answer}
           </Animated.Text>
         </View>
         <View style={{flex: 1, justifyContent: 'flex-end'}}>
