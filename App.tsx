@@ -14,7 +14,8 @@ import Song from '@screens/add_alarm/components/Sound';
 import Repeat from '@screens/add_alarm/components/Repeat';
 import Icon from '@common/Icon';
 import {Pressable} from 'react-native';
-
+import MathQuiz from '@screens/mission/MathQuiz';
+import Dictaion from '@screens/mission/Dictation';
 const modalScreenOption: NativeStackNavigationOptions = {
   headerStyle: {
     backgroundColor: theme.color.black,
@@ -38,35 +39,35 @@ export type RootStackParamList = {
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <AlarmContextProvider>
-        <RootStack.Navigator
-          screenOptions={navigation => ({
-            headerLeft: () => (
-              <Pressable onPress={navigation.navigation.goBack}>
-                <Icon name="Back" size={30} color={theme.color.text_primary} />
-              </Pressable>
-            ),
-            ...modalScreenOption,
-          })}
-          initialRouteName="Home">
-          <RootStack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              title: '👑alarmking',
-            }}
-          />
-          <RootStack.Screen name="AddAlarm" component={AddAlarm} />
-          <RootStack.Screen name="Message" component={Message} />
-          <RootStack.Screen name="Song" component={Song} />
-          <RootStack.Screen name="Repeat" component={Repeat} />
-        </RootStack.Navigator>
-      </AlarmContextProvider>
-    </NavigationContainer>
-  );
-};
+const App = () => (
+  // <NavigationContainer>
+  //   <AlarmContextProvider>
+  //     <RootStack.Navigator
+  //       screenOptions={navigation => ({
+  //         headerLeft: () => (
+  //           <Pressable onPress={navigation.navigation.goBack}>
+  //             <Icon name="Back" size={30} color={theme.color.text_primary} />
+  //           </Pressable>
+  //         ),
+  //         ...modalScreenOption,
+  //       })}
+  //       initialRouteName="Home">
+  //       <RootStack.Screen
+  //         name="Home"
+  //         component={Home}
+  //         options={{
+  //           title: '👑alarmking',
+  //         }}
+  //       />
+  //       <RootStack.Screen name="AddAlarm" component={AddAlarm} />
+  //       <RootStack.Screen name="Message" component={Message} />
+  //       <RootStack.Screen name="Song" component={Song} />
+  //       <RootStack.Screen name="Repeat" component={Repeat} />
+  //     </RootStack.Navigator>
+  //   </AlarmContextProvider>
+  // </NavigationContainer>
+  <MathQuiz />
+  // <Dictaion />
+);
 
 export default App;
